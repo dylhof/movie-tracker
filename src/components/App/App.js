@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import '../../main.scss';
+import { Route, Switch } from 'react-router-dom'
+import { Home } from '../Home/Home'
+import { Favorites } from '../Favorites/Favorites'
+import { Login } from '../Login/Login'
+import { NavBar } from '../NavBar/NavBar'
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          
-          <h1>Movie Tracker</h1>
-        </header>
+        <NavBar />
+        <Switch>
+          <Route exact path='/' component={Home}>Home</Route>
+          <Route exact path='/Favorites' component={Favorites}>Favs</Route>
+          <Route exact path='/Login' component={Login}>Login</Route>
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
