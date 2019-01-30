@@ -10,6 +10,7 @@ export const NavBar = () => {
         Favorites
       </NavLink>
       <NavLink to='/Login'>Sign in/Sign up</NavLink>
+      {/* this navlink will take you to a new login page*/}
     </div>
   );
 }

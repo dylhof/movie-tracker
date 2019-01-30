@@ -21,3 +21,8 @@ export default class App extends Component {
   }
 }
 
+// ComponentDidMount 
+    // this will check if they have a UN & PW in local storage
+        // if yes it will fetch their user info from back end
+    // this will make the initial movie fetch
+        //then put the movies in store
