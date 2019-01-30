@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../../main.scss';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import  Home  from '../Home/Home'
-import { Favorites } from '../../components/Favorites/Favorites'
-import { Login } from '../../components/Login/Login'
+import  Favorites  from '../../components/Favorites/Favorites'
+import  Login  from '../../components/Login/Login'
 import { NavBar } from '../../components/NavBar/NavBar'
 import {fetchData} from '../../helper/apiCall'
 import {storeMovies} from '../../actions'
@@ -29,9 +29,9 @@ export class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route exact path='/' component={Home}></Route>
-          <Route exact path='/Favorites' component={Favorites}></Route>
-          <Route exact path='/Login' component={Login}></Route>
+          <Route exact path='/' component={Home}/>
+          <Route exact path='/Favorites' component={Favorites}/>
+          <Route exact path='/Login' component={Login}/>
         </Switch>
       </div>
     );
@@ -42,7 +42,7 @@ export const mapDispatchToProps = (dispatch) => ({
   dispatchStoreMovies: (movies) => dispatch(storeMovies(movies))
 })
 
-export default connect(null, mapDispatchToProps)(App)
+export default withRouter(connect(null, mapDispatchToProps)(App))
 
 
 

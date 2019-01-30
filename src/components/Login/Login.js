@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-export class Login extends Component{
+export default class Login extends Component{
   constructor() {
     super() 
     this.state = {
-      username = '',
-      password = '',
+      username: '',
+      password: '',
     }
   }
   handleChange = (event) => {
@@ -18,7 +18,7 @@ export class Login extends Component{
 
   handleSubmit = (event) => {
     event.preventDefault();
-
+    this.setState({ username: '', password: '' })
   }
   
   render() {
