@@ -1,4 +1,4 @@
-export const getMovies = (movies) => ({
-  type: 'GET_MOVIES',
+export const storeMovies = (movies) => ({
+  type: 'STORE_MOVIES',
   movies
 })
