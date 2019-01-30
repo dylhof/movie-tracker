@@ -5,11 +5,11 @@ export const NavBar = () => {
   const member = false;
   return (
     <div className="NavBar">
-      <NavLink to="/">Home</NavLink>
-      <NavLink to={(member) ? '/Favorites' : '/Login'}>
+      <NavLink exact to="/">Home</NavLink>
+      <NavLink exact to={(member) ? '/Favorites' : '/Login'}>
         Favorites
       </NavLink>
-      <NavLink to='/Login'>Sign in/Sign up</NavLink>
+      <NavLink exact to='/Login'>Sign in/Sign up</NavLink>
       {/* this navlink will take you to a new login page*/}
     </div>
   );
