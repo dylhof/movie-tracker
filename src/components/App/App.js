@@ -12,7 +12,7 @@ import {connect} from 'react-redux'
 class App extends Component {
 
   fetchAndStoreMovies = async () => {
-    const url = 'https://api.themoviedb.org/3/discover/movie?api_key=4340824bb6ffe9ee70c52fc088a91d53&language=en-US&sort_by=release_date.asc&include_adult=true&include_video=false&page=1'
+    const url = 'https://api.themoviedb.org/3/discover/movie?api_key=4340824bb6ffe9ee70c52fc088a91d53&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1'
     const moviesData = await fetchData(url)
     const movies = moviesData.results
     this.props.getMovies(movies)
