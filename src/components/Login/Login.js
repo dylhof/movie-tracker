@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export const Login = () => {
-  return (
-    <div>Login</div>
-  )
+export class Login extends Component{
+  constructor() {
+    super() 
+    this.state = {
+      username = '',
+      password = '',
+    }
+  }
+  handleChange = (event) => {
+    if(event.target.name === 'username') {
+      this.setState({ username: event.target.value })
+    } else {
+      this.setState({ password: event.target.value })
+    }
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+  }
+  
+  render() {
+    return (
+    <form onSubmit={this.handleSubmit}>
+      <input name='username' value={this.state.username} onChange={this.handleChange}/>
+      <input name='password' value={this.state.password} onChange={this.handleChange}/>
+      <button>Submit</button>
+    </form>
+  )}
+
+  
 }
 
 // login form:
