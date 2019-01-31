@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../main.scss';
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import  Home  from '../Home/Home'
 import  { Favorites }  from '../../components/Favorites/Favorites'
 import  Login  from '../../components/Login/Login'
@@ -33,18 +33,28 @@ export class App extends Component {
           <Route exact path='/' component={Home}/>
           <Route exact path='/Favorites' component={Favorites}/>
           <Route exact path='/Login' component={Login}/>
-          <Route exact path='/SignUp' component={SignUp} />
+          <Route exact path='/SignUp' render={() => (
+            this.props.currentUser ? (
+              <Redirect to='/' />
+            ) : (
+              <SignUp/>
+            )
+          )} />
         </Switch>
       </div>
     );
   }
 }
 
+export const mapStateToProps = (state) => ({
+  currentUser: state.currentUser
+})
+
 export const mapDispatchToProps = (dispatch) => ({
   dispatchStoreMovies: (movies) => dispatch(storeMovies(movies))
 })
 
-export default withRouter(connect(null, mapDispatchToProps)(App))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
 
 
 
