@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { fetchData, fetchPost } from '../../helper/apiCall';
 
 export default class SignUp extends Component {
   constructor() {
@@ -7,13 +8,13 @@ export default class SignUp extends Component {
       name: '',
       username: '',
       password: '',
-      userFound: ''
+      error: ''
     }
   }
   handleChange = (event) => {
     if (event.target.name === 'username') {
       this.setState({ username: event.target.value })
-    } else if (event.target.password) {
+    } else if (event.target.name === 'password') {
       this.setState({ password: event.target.value })
     } else {
       this.setState({ name: event.target.value })
@@ -30,47 +31,24 @@ export default class SignUp extends Component {
     event.preventDefault();
     let allUsers
     try {
-      const response = await fetch('http://localhost:3000/api/users')
-      if (response.ok) {
-        const result = await response.json()
-        allUsers = result.data
-      } else {
-        throw Error(`There was an error: ${Error.status}`)
-      }
-    } catch (error) {
-
-    }
-
-    let foundUser = allUsers.find(user => {
-      return user.email === this.state.username
-    })
-
-    if (foundUser) {
-      this.setState({ userFound: 'User exists' })
-    } else {
-
-
-
-      const url = 'http://localhost:3000/api/users/new'
-      try {
-        const response = await fetch(url, {
+      const response = await fetchPost('http://localhost:3000/api/users/new',
+        {
           method: 'POST',
           body: JSON.stringify({ name: this.state.name, email: this.state.username, password: this.state.password }),
           headers: {
             'Content-Type': 'application/json'
           }
         })
-
-        const result = await response.json()
-        debugger
-      }
-      catch (error) {
-        throw Error(`There was an error: ${Error.status}`)
+    } catch (error) {
+      console.log(error.message)
+      if (error.message === '500') {
+        this.setState({ error: 'This email already exists!' })
       }
     }
-
-
   }
+
+
+
 
   render() {
     return (
@@ -79,7 +57,7 @@ export default class SignUp extends Component {
         <input name='username' value={this.state.username} onChange={this.handleChange} />
         <input name='password' value={this.state.password} onChange={this.handleChange} />
         <button>Submit</button>
-        <span>{this.state.userFound}</span>
+        <span>{this.state.error}</span>
       </form>
     )
   }
