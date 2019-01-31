@@ -1,7 +1,7 @@
 export const userReducer = (state={}, action) => {
   switch (action.type) {
     case 'SET_USER':
-      return {name: 'dylan', id: action.id}
+      return {name: action.name, id: action.id}
       break;
     default:
       return state;

@@ -41,9 +41,8 @@ export class SignUp extends Component {
             'Content-Type': 'application/json'
           }
         })
-      const userID = response.id
-      console.log(userID)
-      this.props.dispatchSetCurrentUser('Matt', 100)
+      this.props.dispatchSetCurrentUser(this.state.name, response.id)
+      this.setState({name: '', username: '', password: ''})
     } catch (error) {
       console.log(error.message)
       if (error.message === '500') {
@@ -51,9 +50,6 @@ export class SignUp extends Component {
       }
     }
   }
-
-
-
 
   render() {
     return (
