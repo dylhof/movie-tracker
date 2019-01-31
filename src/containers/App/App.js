@@ -5,7 +5,7 @@ import  Home  from '../Home/Home'
 import  { Favorites }  from '../../components/Favorites/Favorites'
 import  Login  from '../../components/Login/Login'
 import SignUp from '../SignUp/SignUp'
-import { NavBar } from '../../components/NavBar/NavBar'
+import  NavBar  from '../NavBar/NavBar'
 import {fetchData} from '../../helper/apiCall'
 import {storeMovies} from '../../actions'
 import {connect} from 'react-redux'
@@ -32,6 +32,7 @@ export class App extends Component {
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route exact path='/Favorites' component={Favorites}/>
+
           <Route exact path='/Login' component={Login}/>
           <Route exact path='/SignUp' render={() => (
             this.props.currentUser ? (

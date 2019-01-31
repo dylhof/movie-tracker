@@ -8,3 +8,7 @@ export const setCurrentUser = (name, id) => ({
   name,
   id
 })
+
+export const logoutCurrentUser = () => ({
+  type: 'LOGOUT_USER'
+})
