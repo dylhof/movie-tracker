@@ -12,6 +12,6 @@ export const fetchPost = async (url, options) => {
   if (response.ok) {
     return response.json()
   } else {
-    throw new Error(response.status)
+    throw new Error(`Error fetching, code: ${response.status}`)
   }
 }
