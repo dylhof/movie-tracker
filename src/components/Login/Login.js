@@ -1,47 +1,56 @@
 import React, { Component } from 'react';
 
-export default class Login extends Component{
+export default class Login extends Component {
   constructor() {
-    super() 
+    super()
     this.state = {
       username: '',
       password: '',
     }
   }
   handleChange = (event) => {
-    if(event.target.name === 'username') {
+    if (event.target.name === 'username') {
       this.setState({ username: event.target.value })
     } else {
       this.setState({ password: event.target.value })
     }
   }
 
+  //   sign in   /api/users
+  // Create Account - /api/users / new
+  //   Add Favorite - /api/users / favorites / new
+  //   Receive All Favorites - /api/users /: user_id / favorites
+  // Delete a Favorite - /api/users /: user_id / favorites /: movie_id
+
   handleSubmit = async (event) => {
     event.preventDefault();
-    const url = 'http://localhost:3000/api/users'
+    const url = 'http://localhost:3000/api/users/new'
     try {
-      const response = await fetch(url)
-      if(response.ok) {
-        const result = await response.json()
-        console.log(result.data)
-      } else { throw Error(response.status)}
-    } catch (error) {
-      // console.log(error)
-      // throw Error(`There was an error: ${Error.status}`)
+      const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({ name: 'Matt', email: this.state.username, password: this.state.password }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const result = await response.json()
     }
-    this.setState({ username: '', password: '' })
+    catch (error) {
+      throw Error(`There was an error: ${Error.status}`)
+    }
   }
-  
+
   render() {
     return (
-    <form onSubmit={this.handleSubmit}>
-      <input name='username' value={this.state.username} onChange={this.handleChange}/>
-      <input name='password' value={this.state.password} onChange={this.handleChange}/>
-      <button>Submit</button>
-    </form>
-  )}
+      <form onSubmit={this.handleSubmit}>
+        <input name='username' value={this.state.username} onChange={this.handleChange} />
+        <input name='password' value={this.state.password} onChange={this.handleChange} />
+        <button>Submit</button>
+      </form>
+    )
+  }
 
-  
+
 }
 
 // login form:
