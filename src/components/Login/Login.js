@@ -16,8 +16,19 @@ export default class Login extends Component{
     }
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
+    const url = 'http://localhost:3000/api/users'
+    try {
+      const response = await fetch(url)
+      if(response.ok) {
+        const result = await response.json()
+        console.log(result.data)
+      } else { throw Error(response.status)}
+    } catch (error) {
+      // console.log(error)
+      // throw Error(`There was an error: ${Error.status}`)
+    }
     this.setState({ username: '', password: '' })
   }
   
