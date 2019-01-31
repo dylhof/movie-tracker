@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { fetchData, fetchPost } from '../../helper/apiCall';
+import { fetchPost } from '../../helper/apiCall';
+import { connect } from 'react-redux';
+import { setCurrentUser } from '../../actions';
 
-export default class SignUp extends Component {
+export class SignUp extends Component {
   constructor() {
     super()
     this.state = {
@@ -39,6 +41,9 @@ export default class SignUp extends Component {
             'Content-Type': 'application/json'
           }
         })
+      const userID = response.id
+      console.log(userID)
+      this.props.dispatchSetCurrentUser('Matt', 100)
     } catch (error) {
       console.log(error.message)
       if (error.message === '500') {
@@ -65,6 +70,11 @@ export default class SignUp extends Component {
 
 }
 
+export const mapDispatchToProps = (dispatch) => ({
+  dispatchSetCurrentUser: (name, id) => dispatch(setCurrentUser(name, id))
+})
+
+export default connect(null, mapDispatchToProps)(SignUp)
 // SignUp form:
 // local state to store what they are typing in (control form)
 // username field
