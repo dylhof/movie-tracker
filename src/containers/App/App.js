@@ -3,7 +3,7 @@ import '../../main.scss';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import  Home  from '../Home/Home'
 import  { Favorites }  from '../../components/Favorites/Favorites'
-import  Login  from '../../components/Login/Login'
+import  Login from '../Login/Login'
 import SignUp from '../SignUp/SignUp'
 import  NavBar  from '../NavBar/NavBar'
 import {fetchData} from '../../helper/apiCall'
@@ -33,7 +33,13 @@ export class App extends Component {
           <Route exact path='/' component={Home}/>
           <Route exact path='/Favorites' component={Favorites}/>
 
-          <Route exact path='/Login' component={Login}/>
+          <Route exact path='/Login' render={() => (
+            this.props.currentUser ? (
+              <Redirect to='/' />
+            ) : (
+                <Login />
+              )
+          )} />
           <Route exact path='/SignUp' render={() => (
             this.props.currentUser ? (
               <Redirect to='/' />

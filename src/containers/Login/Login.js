@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { fetchPost } from '../../helper/apiCall'
+import { setCurrentUser } from '../../actions';
+import { connect } from 'react-redux';
 
-export default class Login extends Component {
+export class Login extends Component {
   constructor() {
     super()
     this.state = {
       username: '',
       password: '',
-      userFound: ''
+      error: ''
     }
   }
   handleChange = (event) => {
@@ -25,48 +28,21 @@ export default class Login extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    let allUsers
     try {
-      const response = await fetch('http://localhost:3000/api/users')
-      if (response.ok) {
-        const result = await response.json()
-        allUsers = result.data
-      } else {
-        throw Error(`There was an error: ${Error.status}`)
-      }
-    } catch (error) {
-
-    }
-
-    let foundUser = allUsers.find(user => {
-      return user.email === this.state.username
-    })
-
-    if (foundUser) {
-      this.setState({ userFound: 'User exists' })
-    } else {
-
- 
-
-      const url = 'http://localhost:3000/api/users/new'
-      try {
-        const response = await fetch(url, {
+      const response = await fetchPost('http://localhost:3000/api/users',
+        {
           method: 'POST',
-          body: JSON.stringify({ name: 'Matt', email: this.state.username, password: this.state.password }),
+          body: JSON.stringify({ email: this.state.username.toLowerCase(), password: this.state.password }),
           headers: {
             'Content-Type': 'application/json'
           }
         })
-
-        const result = await response.json()
-        debugger
-      }
-      catch (error) {
-        throw Error(`There was an error: ${Error.status}`)
+      this.props.dispatchSetCurrentUser(response.data.name, response.data.id)
+    } catch (error) {
+      if (error.message === '500') {
+        this.setState({ error: "Email or Password doesn't match" })
       }
     }
-
-
   }
 
   render() {
@@ -75,13 +51,17 @@ export default class Login extends Component {
         <input name='username' value={this.state.username} onChange={this.handleChange} />
         <input name='password' value={this.state.password} onChange={this.handleChange} />
         <button>Submit</button>
-        <span>{this.state.userFound}</span>
+        <span>{this.state.error}</span>
       </form>
     )
   }
-
-
 }
+
+export const mapDispatchToProps = (dispatch) => ({
+  dispatchSetCurrentUser: (name, id) => dispatch(setCurrentUser(name, id))
+})
+
+export default connect(null, mapDispatchToProps)(Login)
 
 // login form:
 // local state to store what they are typing in (control form)
