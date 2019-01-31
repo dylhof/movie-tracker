@@ -9,7 +9,8 @@ export const NavBar = () => {
       <NavLink exact to={(member) ? '/Favorites' : '/Login'}>
         Favorites
       </NavLink>
-      <NavLink exact to='/Login'>Sign in/Sign up</NavLink>
+      <NavLink exact to='/Login'>Login</NavLink>
+      <NavLink exact to='/SignUp'>Sign up</NavLink>
       {/* this navlink will take you to a new login page*/}
     </div>
   );

@@ -4,6 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import  Home  from '../Home/Home'
 import  { Favorites }  from '../../components/Favorites/Favorites'
 import  Login  from '../../components/Login/Login'
+import SignUp from '../../components/SignUp/SignUp'
 import { NavBar } from '../../components/NavBar/NavBar'
 import {fetchData} from '../../helper/apiCall'
 import {storeMovies} from '../../actions'
@@ -32,6 +33,7 @@ export class App extends Component {
           <Route exact path='/' component={Home}/>
           <Route exact path='/Favorites' component={Favorites}/>
           <Route exact path='/Login' component={Login}/>
+          <Route exact path='/SignUp' component={SignUp} />
         </Switch>
       </div>
     );

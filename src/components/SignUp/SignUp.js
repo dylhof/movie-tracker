@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-export default class Login extends Component {
+export default class SignUp extends Component {
   constructor() {
     super()
     this.state = {
+      name: '',
       username: '',
       password: '',
       userFound: ''
@@ -12,8 +13,10 @@ export default class Login extends Component {
   handleChange = (event) => {
     if (event.target.name === 'username') {
       this.setState({ username: event.target.value })
-    } else {
+    } else if (event.target.password) {
       this.setState({ password: event.target.value })
+    } else {
+      this.setState({ name: event.target.value })
     }
   }
 
@@ -46,13 +49,13 @@ export default class Login extends Component {
       this.setState({ userFound: 'User exists' })
     } else {
 
- 
+
 
       const url = 'http://localhost:3000/api/users/new'
       try {
         const response = await fetch(url, {
           method: 'POST',
-          body: JSON.stringify({ name: 'Matt', email: this.state.username, password: this.state.password }),
+          body: JSON.stringify({ name: this.state.name, email: this.state.username, password: this.state.password }),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -72,6 +75,7 @@ export default class Login extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <input name='name' value={this.state.name} onChange={this.handleChange} />
         <input name='username' value={this.state.username} onChange={this.handleChange} />
         <input name='password' value={this.state.password} onChange={this.handleChange} />
         <button>Submit</button>
@@ -83,7 +87,7 @@ export default class Login extends Component {
 
 }
 
-// login form:
+// SignUp form:
 // local state to store what they are typing in (control form)
 // username field
 // password field
