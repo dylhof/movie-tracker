@@ -1,8 +1,13 @@
 import React from 'react'
 
-export const MovieCard = () => {
+export const MovieCard = ({title, poster_path}) => {
+  const poster = `https://image.tmdb.org/t/p/w200/${poster_path}`
+  const alt = `${title} poster`
   return(
-    <div>MOVIE!</div>
+    <div>
+          <h2>{title}</h2>
+          <img src={poster} alt={alt} />
+        </div>
   )
 }
 

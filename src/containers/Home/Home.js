@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import {MovieCard} from '../../components/MovieCard/MovieCard'
 
 export class Home extends Component{
 
   render() {
   const movieCards = this.props.movies.map(movie => {
-    const poster = `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
-    const alt = `${movie.title} poster`
       return (
-        <div>
-          <h2>{movie.title}</h2>
-          <img src={poster} alt={alt} />
-        </div>
+        <MovieCard {...movie}/>
       )
     })
     return (
