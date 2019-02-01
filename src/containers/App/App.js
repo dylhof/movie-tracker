@@ -17,12 +17,10 @@ export class App extends Component {
     const moviesData = await fetchData(url)
     const movies = moviesData.results
     this.props.dispatchStoreMovies(movies)
-
   }
 
   componentDidMount = () => {
     this.fetchAndStoreMovies()
-
   }
 
   render() {

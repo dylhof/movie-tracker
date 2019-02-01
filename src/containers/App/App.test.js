@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { App } from './App';
 import { shallow } from 'enzyme'
 import { mapDispatchToProps } from './App'
 import * as actions from '../../actions'
@@ -15,8 +15,6 @@ describe('App', () => {
 
   const store = createStore(rootReducer)
   let wrapper
-
- 
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -63,16 +61,31 @@ describe('App', () => {
   })
 
   describe('fetchAndStoreMovies', () => {
-    
+    const mockDispatchStoreMovies = jest.fn()
     beforeEach(() => {
-      wrapper = shallow(<App />)
+      wrapper = shallow(<App dispatchStoreMovies={mockDispatchStoreMovies} />)
     })
 
     it('should call fetchData', () => {
       //execution
+      api.fetchData = jest.fn()
       wrapper.instance().fetchAndStoreMovies()
       //expectation
       expect(api.fetchData).toHaveBeenCalled()
+    })
+
+    it('should update state with an array of movies', async () => {
+      //setup
+      const mockMovies = [{
+        results: [
+          { title: 'Aquaman' }
+        ]
+      }]
+      api.fetchData = jest.fn().mockImplementation(() => Promise.resolve(mockMovies))
+      // execution
+      await wrapper.instance().fetchAndStoreMovies()
+      //expectation
+      expect(wrapper.instance().props.dispatchStoreMovies).toHaveBeenCalledWith(mockMovies.results)
     })
   })
 
