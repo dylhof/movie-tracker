@@ -5,9 +5,10 @@ export const MovieCard = ({title, poster_path}) => {
   const alt = `${title} poster`
   return(
     <div>
-          <h2>{title}</h2>
-          <img src={poster} alt={alt} />
-        </div>
+      <h2>{title}</h2>
+      <img src={poster} alt={alt} />
+      <button onClick={}><i className='fas fa-star'></i></button>
+    </div>
   )
 }
 
