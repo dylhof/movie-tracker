@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import '../../main.scss';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
-import  Home  from '../Home/Home'
-import  { Favorites }  from '../../components/Favorites/Favorites'
-import  Login from '../Login/Login'
+import Home from '../Home/Home'
+import { Favorites } from '../../components/Favorites/Favorites'
+import Login from '../Login/Login'
 import SignUp from '../SignUp/SignUp'
-import  NavBar  from '../NavBar/NavBar'
-import {fetchData} from '../../helper/apiCall'
-import {storeMovies} from '../../actions'
-import {connect} from 'react-redux'
+import NavBar from '../NavBar/NavBar'
+import { fetchData } from '../../helper/apiCall'
+import { storeMovies } from '../../actions'
+import { connect } from 'react-redux'
 
 export class App extends Component {
 
@@ -17,11 +17,11 @@ export class App extends Component {
     const moviesData = await fetchData(url)
     const movies = moviesData.results
     this.props.dispatchStoreMovies(movies)
-  
+
   }
 
   componentDidMount = () => {
- this.fetchAndStoreMovies()
+    this.fetchAndStoreMovies()
 
   }
 
@@ -30,8 +30,8 @@ export class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route exact path='/Favorites' component={Favorites}/>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/Favorites' component={Favorites} />
 
           <Route exact path='/Login' render={() => (
             this.props.currentUser ? (
@@ -44,8 +44,8 @@ export class App extends Component {
             this.props.currentUser ? (
               <Redirect to='/' />
             ) : (
-              <SignUp/>
-            )
+                <SignUp />
+              )
           )} />
         </Switch>
       </div>
