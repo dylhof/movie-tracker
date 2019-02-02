@@ -27,3 +27,7 @@ export const deleteFavorite = (id) => ({
   type: 'DELETE_FAVORITE',
   id
 })
+
+export const clearFavorites = () => ({
+  type: 'CLEAR_FAVORITES',
+})

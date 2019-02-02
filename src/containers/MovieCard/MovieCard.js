@@ -72,7 +72,7 @@ export class MovieCard extends Component {
   }
   render() {
 
-    const { title, poster_path, id, favorites } = this.props
+    const { title, poster_path, id, favorites} = this.props
     const cssClasses = ["favorite-btn", favorites.includes(id) ? "isFavorite" : null]
     // const {currentUser} = this.props.currentUser
     const value = favorites.includes(id) ? true : false

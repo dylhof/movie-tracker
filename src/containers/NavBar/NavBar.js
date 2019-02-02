@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { logoutCurrentUser } from '../../actions';
+import { logoutCurrentUser, clearFavorites } from '../../actions';
 
 class NavBar extends Component {
   // constructor() {
@@ -10,6 +10,7 @@ class NavBar extends Component {
 
   handleLogoutClick = () =>{
     this.props.dispatchLogoutUser()
+    this.props.dispatchClearFavorites()
   }
   render() {
     return (
@@ -33,7 +34,8 @@ class NavBar extends Component {
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  dispatchLogoutUser: () => dispatch(logoutCurrentUser())
+  dispatchLogoutUser: () => dispatch(logoutCurrentUser()),
+  dispatchClearFavorites: () => dispatch(clearFavorites())
 })
 
 export const mapStateToProps = (state) => ({

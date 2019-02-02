@@ -24,12 +24,21 @@ export class App extends Component {
   }
 
   render() {
+
+
+    
     return (
       <div className="App">
         <NavBar />
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/Favorites' component={Favorites} />
+          <Route exact path='/Favorites' render={() => (
+            this.props.currentUser ? (
+             <Favorites />
+            ) : (
+                <Redirect to='/Login' />
+              )
+          )} />
 
           <Route exact path='/Login' render={() => (
             this.props.currentUser ? (
