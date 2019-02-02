@@ -66,7 +66,7 @@ export class SignUp extends Component {
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  dispatchSetCurrentUser: (name, id) => dispatch(setCurrentUser(name, id))
+  dispatchSetCurrentUser: (name, userID) => dispatch(setCurrentUser(name, userID))
 })
 
 export default connect(null, mapDispatchToProps)(SignUp)

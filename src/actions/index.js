@@ -12,3 +12,13 @@ export const setCurrentUser = (name, id) => ({
 export const logoutCurrentUser = () => ({
   type: 'LOGOUT_USER'
 })
+
+export const addFavorite = (id) => ({
+  type: 'ADD_FAVORITE',
+  id
+})
+
+export const deleteFavorite = (id) => ({
+  type: 'DELETE_FAVORITE',
+  id
+})
