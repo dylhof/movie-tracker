@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { fetchPost } from '../../helper/apiCall'
-import { setCurrentUser } from '../../actions';
+import { fetchPost, fetchData } from '../../helper/apiCall'
+import { setCurrentUser, addAllUserFavorites } from '../../actions';
 import { connect } from 'react-redux';
 
 export class Login extends Component {
@@ -37,7 +37,20 @@ export class Login extends Component {
             'Content-Type': 'application/json'
           }
         })
-      this.props.dispatchSetCurrentUser(response.data.name, response.data.id)
+
+        // if(!response.ok) {
+        //   throw Error(response.statusText)
+        // }
+        const user_id = response.data.id
+        this.props.dispatchSetCurrentUser(response.data.name, user_id)
+        // debugger
+
+      const url = `http://localhost:3000/api/users/${user_id}/favorites`
+      const favoritesResponse = await fetchData(url)
+       console.log(favoritesResponse)
+      //  debugger
+        const favoriteIDs = favoritesResponse.data.map(favorite => favorite.movie_id)
+      this.props.dispatchAddAllUserFavorites(favoriteIDs)
     } catch (error) {
       if (error.message === '500') {
         this.setState({ error: "Email or Password doesn't match" })
@@ -58,7 +71,8 @@ export class Login extends Component {
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  dispatchSetCurrentUser: (name, id) => dispatch(setCurrentUser(name, id))
+  dispatchSetCurrentUser: (name, id) => dispatch(setCurrentUser(name, id)),
+  dispatchAddAllUserFavorites: (favorites) => dispatch(addAllUserFavorites(favorites))
 })
 
 export default connect(null, mapDispatchToProps)(Login)

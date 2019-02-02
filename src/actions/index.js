@@ -18,6 +18,11 @@ export const addFavorite = (id) => ({
   id
 })
 
+export const addAllUserFavorites = (favorites) => ({
+  type: 'ADD_ALL_USER_FAVORITES',
+  favorites
+})
+
 export const deleteFavorite = (id) => ({
   type: 'DELETE_FAVORITE',
   id

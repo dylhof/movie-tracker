@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../main.scss';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import Home from '../Home/Home'
-import { Favorites } from '../../components/Favorites/Favorites'
+import Favorites from '../Favorites/Favorites'
 import Login from '../Login/Login'
 import SignUp from '../SignUp/SignUp'
 import NavBar from '../NavBar/NavBar'
