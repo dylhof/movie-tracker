@@ -1,19 +1,5 @@
 import * as API from './apiCall';
 
-export const tryUnfavorite = async (id, userID) => {
-
-  const url = `http://localhost:3000/api/users/${userID}/favorites/${id}`
-  await API.fetchPost(url,
-    {
-      method: 'DELETE',
-      body: JSON.stringify({
-        user_id: userID, movie_id: id
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-}
 
 export const tryFavorite = async (title, id, userID, poster_path, release_date, vote_average, overview) => {
 
@@ -29,4 +15,21 @@ export const tryFavorite = async (title, id, userID, poster_path, release_date, 
       }
     })
 }
+
+export const tryUnfavorite = async (id, userID) => {
+
+  const url = `http://localhost:3000/api/users/${userID}/favorites/${id}`
+  await API.fetchPost(url,
+    {
+      method: 'DELETE',
+      body: JSON.stringify({
+        user_id: userID, movie_id: id
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+}
+
+
 

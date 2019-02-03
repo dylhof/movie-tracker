@@ -1,0 +1,7 @@
+
+describe('MovieCard', () => {
+
+  it('should', () => {
+
+  })
+})

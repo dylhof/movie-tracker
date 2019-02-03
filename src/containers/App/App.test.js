@@ -62,8 +62,12 @@ describe('App', () => {
 
   describe('fetchAndStoreMovies', () => {
     const mockDispatchStoreMovies = jest.fn()
+    const mockDispatchSetLoading = jest.fn()
     beforeEach(() => {
-      wrapper = shallow(<App dispatchStoreMovies={mockDispatchStoreMovies} />)
+      wrapper = shallow(<App
+        dispatchStoreMovies={mockDispatchStoreMovies}
+        dispatchSetLoading={mockDispatchSetLoading}
+      />)
     })
 
     it('should call fetchData', () => {
