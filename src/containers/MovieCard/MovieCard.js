@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPost } from '../../helper/apiCall'
 import { addFavorite, deleteFavorite } from '../../actions';
 import { Link } from 'react-router-dom';
+import * as helper from '../../helper/helpers'
 
 export class MovieCard extends Component {
   constructor() {
@@ -13,57 +13,24 @@ export class MovieCard extends Component {
     }
   }
 
-
-  handleFavoriteClick = async (event) => {
+  handleFavoriteClick = (event) => {
     const { title, id, poster_path, release_date, vote_average, overview } = this.props
-    
-    if (this.props.currentUser) {
-      const {userID} = this.props.currentUser
 
-      if (event.target.value === 'true') {
-        try {
-          const url = `http://localhost:3000/api/users/${userID}/favorites/${id}`
-          const response = await fetchPost(url,
-            {
-              method: 'DELETE',
-              body: JSON.stringify({
-                user_id: userID,
-                movie_id: id
-              }),
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            })
-          this.props.dispatchDeleteFavorite(id)
-        } catch (error) {
-          if (error.message === '500') {
-            this.setState({ error: 'Something went wrong, favorite not added' })
-          }
-        }
-      } else {
-        try {
-          const response = await fetchPost('http://localhost:3000/api/users/favorites/new',
-            {
-              method: 'POST',
-              body: JSON.stringify({
-                movie_id: id,
-                user_id: userID,
-                title,
-                poster_path,
-                release_date,
-                vote_average,
-                overview
-              }),
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            })
-          this.props.dispatchAddFavorite(id)
-        } catch (error) {
-          if (error.message === '500') {
-            this.setState({ error: 'Something went wrong, favorite not added' })
-          }
-        }
+    if (this.props.currentUser && event.target.value === 'true') {
+      const { userID } = this.props.currentUser
+      try {
+        helper.tryUnfavorite(id, userID)
+        this.props.dispatchDeleteFavorite(id)
+      } catch (error) {
+        this.props.dispatchSetError(error.message)
+      }
+    } else if (this.props.currentUser && event.target.value === 'false') {
+      const { userID } = this.props.currentUser
+      try {
+        helper.tryFavorite(title, id, userID, poster_path, release_date, vote_average, overview)
+        this.props.dispatchAddFavorite(id)
+      } catch (error) {
+        this.props.dispatchSetError(error.message)
       }
     } else {
       this.setState({
@@ -73,8 +40,7 @@ export class MovieCard extends Component {
   }
 
   render() {
-// debugger
-    const { title, poster_path, id, favorites} = this.props
+    const { title, poster_path, id, favorites } = this.props
     const cssClasses = ["favorite-btn", favorites.includes(id) ? "isFavorite" : null]
     const value = favorites.includes(id) ? true : false
     const poster = `https://image.tmdb.org/t/p/w200/${poster_path}`
