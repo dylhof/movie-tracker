@@ -36,3 +36,8 @@ export const setLoading = (bool) => ({
   type: 'SET_LOADING',
   bool
 })
+
+export const setError = (message) => ({
+  type: 'SET_ERROR',
+  message
+})

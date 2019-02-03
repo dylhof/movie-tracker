@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { MovieCard } from '../MovieCard/MovieCard';
+import MovieCard from '../MovieCard/MovieCard';
 
 export class Favorites extends Component {
   render() {
-    // debugger
     const { movies, favorites, currentUser } = this.props
     const displayFavorites = movies
       .filter(movie => favorites.includes(movie.id))
