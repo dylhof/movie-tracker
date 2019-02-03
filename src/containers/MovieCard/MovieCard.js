@@ -8,8 +8,7 @@ export class MovieCard extends Component {
   constructor() {
     super()
     this.state = {
-      isUser: '',
-      error: ''
+      isUser: ''
     }
   }
 
