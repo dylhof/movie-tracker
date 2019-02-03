@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { MovieCard, mapStateToProps, mapDispatchToProps } from './MovieCard'
 import * as helper from '../../helper/helpers'
+import * as actions from '../../actions/index'
 
 describe('MovieCard', () => {
   let wrapper
@@ -23,12 +24,13 @@ describe('MovieCard', () => {
   })
 
   it('should match the snapshot', () => {
-
+    //expectation
+    expect(wrapper).toMatchSnapshot()
   })
 
   it('should have initial state', () => {
     //setup
-    const expected = {isUser: ''}
+    const expected = { isUser: '' }
     //expectation
     expect(wrapper.state()).toEqual(expected)
   })
@@ -73,4 +75,50 @@ describe('MovieCard', () => {
       expect(wrapper.state('isUser')).toEqual('Please login or create an acount to favorite your movies!')
     })
   })
+
+  describe('mapStateToProps', () => {
+
+    it('should return an object with a current user and an array of favorites', () => {
+      //setup
+      const mockState = {
+        currentUser: [{ title: 'Aquaman' }],
+        favorites: [{}],
+        error: 'Error'
+      }
+      const expected = {
+        currentUser: [{ title: 'Aquaman' }],
+        favorites: [{}]
+      }
+      //execution
+      const mappedProps = mapStateToProps(mockState)
+      //expectation
+      expect(mappedProps).toEqual(expected)
+    })
+  })
+
+  describe('mapDispatchToProps', () => {
+
+    it('should call dispatch when using dispatchAddFavorite from MDTP', () => {
+      //setup
+      const mockDispatch = jest.fn()
+      const actionToDispatch = actions.addFavorite(1)
+      //execution
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.dispatchAddFavorite(1)
+      //expectation
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
+
+    it('should call dispatch when using dispatchDeleteFavorite from MDTP', () => {
+      //setup
+      const mockDispatch = jest.fn()
+      const actionToDispatch = actions.deleteFavorite(1)
+      //execution
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.dispatchDeleteFavorite(1)
+      //expectation
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
+  })
+
 })
