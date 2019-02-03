@@ -6,6 +6,7 @@ import Favorites from '../Favorites/Favorites'
 import Login from '../Login/Login'
 import SignUp from '../SignUp/SignUp'
 import NavBar from '../NavBar/NavBar'
+import MovieDetails from '../MovieDetails/MovieDetails'
 import { fetchData } from '../../helper/apiCall'
 import { storeMovies, setLoading, setError } from '../../actions'
 import { connect } from 'react-redux'
@@ -41,28 +42,35 @@ export class App extends Component {
           :
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/Favorites' render={() => (
+          <Route path='/favorites' render={() => (
             this.props.currentUser ? (
               <Favorites />
             ) : (
-                <Redirect to='/Login' />
+                <Redirect to='/login' />
               )
           )} />
 
-          <Route exact path='/Login' render={() => (
+          <Route path='/login' render={() => (
             this.props.currentUser ? (
               <Redirect to='/' />
             ) : (
                 <Login />
               )
           )} />
-          <Route exact path='/SignUp' render={() => (
+          <Route path='/signUp' render={() => (
             this.props.currentUser ? (
               <Redirect to='/' />
             ) : (
                 <SignUp />
               )
           )} />
+          <Route path='/movie/:id' render={({ match }) => {
+            const { id } = match.params
+            const movie = this.props.movies.find(movie => movie.id === parseInt(id))
+            if (movie) {
+              return <MovieDetails {...movie} /> 
+            }
+          }} />
         </Switch>
         }
       </div>
@@ -72,7 +80,8 @@ export class App extends Component {
 
 export const mapStateToProps = (state) => ({
   currentUser: state.currentUser,
-  error: state.error
+  error: state.error,
+  movies: state.movies,
 })
 
 export const mapDispatchToProps = (dispatch) => ({

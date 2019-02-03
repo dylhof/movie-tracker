@@ -16,7 +16,7 @@ class NavBar extends Component {
     return (
       <div className="NavBar">
         <NavLink exact to="/">Home</NavLink>
-        <NavLink exact to={(this.props.currentUser) ? '/Favorites' : '/Login'}>
+        <NavLink exact to={(this.props.currentUser) ? '/favorites' : '/login'}>
           Favorites
       </NavLink>
         {
@@ -24,8 +24,8 @@ class NavBar extends Component {
             <button onClick={this.handleLogoutClick}>Logout</button>
             :
             <div>
-              <NavLink exact to='/Login'>Login</NavLink>
-              <NavLink exact to='/SignUp'>Sign up</NavLink>
+              <NavLink exact to='/login'>Login</NavLink>
+              <NavLink exact to='/signUp'>Sign up</NavLink>
             </div>
         }
       </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchPost } from '../../helper/apiCall'
 import { addFavorite, deleteFavorite } from '../../actions';
+import { Link } from 'react-router-dom';
 
 export class MovieCard extends Component {
   constructor() {
@@ -81,7 +82,9 @@ export class MovieCard extends Component {
     return (
       <div>
         <h2>{title}</h2>
-        <img src={poster} alt={alt} />
+        <Link to={`/movie/${id}`}>
+          <img src={poster} alt={alt} />
+        </Link>
         <button className={cssClasses.join(' ')} value={value} onClick={(event) => this.handleFavoriteClick(event)}><i className='fas fa-star'></i></button>
         <span>{this.state.isUser}</span>
       </div>
