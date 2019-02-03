@@ -31,3 +31,8 @@ export const deleteFavorite = (id) => ({
 export const clearFavorites = () => ({
   type: 'CLEAR_FAVORITES',
 })
+
+export const setLoading = (bool) => ({
+  type: 'SET_LOADING',
+  bool
+})

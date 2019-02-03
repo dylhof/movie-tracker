@@ -7,15 +7,18 @@ import Login from '../Login/Login'
 import SignUp from '../SignUp/SignUp'
 import NavBar from '../NavBar/NavBar'
 import { fetchData } from '../../helper/apiCall'
-import { storeMovies } from '../../actions'
+import { storeMovies, setLoading } from '../../actions'
 import { connect } from 'react-redux'
 
 export class App extends Component {
 
+
   fetchAndStoreMovies = async () => {
+    
     const url = 'https://api.themoviedb.org/3/discover/movie?api_key=4340824bb6ffe9ee70c52fc088a91d53&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1'
     const moviesData = await fetchData(url)
     const movies = moviesData.results
+    this.props.dispatchSetLoading(false)
     this.props.dispatchStoreMovies(movies)
   }
 
@@ -24,17 +27,19 @@ export class App extends Component {
   }
 
   render() {
-
-
-    
     return (
       <div className="App">
         <NavBar />
+
+        {/* {error && error} */}
+        {
+          this.props.isLoading ? <div>...Loading</div>
+          :
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/Favorites' render={() => (
             this.props.currentUser ? (
-             <Favorites />
+              <Favorites />
             ) : (
                 <Redirect to='/Login' />
               )
@@ -55,17 +60,19 @@ export class App extends Component {
               )
           )} />
         </Switch>
+        }
       </div>
     );
   }
 }
 
 export const mapStateToProps = (state) => ({
-  currentUser: state.currentUser
+  currentUser: state.currentUser,
 })
 
 export const mapDispatchToProps = (dispatch) => ({
-  dispatchStoreMovies: (movies) => dispatch(storeMovies(movies))
+  dispatchStoreMovies: (movies) => dispatch(storeMovies(movies)),
+  dispatchSetLoading: (bool) => dispatch(setLoading(bool))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

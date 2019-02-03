@@ -12,6 +12,7 @@ export class MovieCard extends Component {
     }
   }
 
+
   handleFavoriteClick = async (event) => {
     const { title, id, poster_path, release_date, vote_average, overview } = this.props
     
@@ -68,13 +69,12 @@ export class MovieCard extends Component {
         isUser: 'Please login or create an acount to favorite your movies!'
       })
     }
-
   }
-  render() {
 
+  render() {
+// debugger
     const { title, poster_path, id, favorites} = this.props
     const cssClasses = ["favorite-btn", favorites.includes(id) ? "isFavorite" : null]
-    // const {currentUser} = this.props.currentUser
     const value = favorites.includes(id) ? true : false
     const poster = `https://image.tmdb.org/t/p/w200/${poster_path}`
     const alt = `${title} poster`
@@ -82,10 +82,6 @@ export class MovieCard extends Component {
       <div>
         <h2>{title}</h2>
         <img src={poster} alt={alt} />
-        {/* <p>{name}</p> */}
-        {/*onClick make fetch to add(api/users/favorites/new)
-       send(movie_id, user_id, title, poster_path, release_date vote_average, overview),
-       action = ADD_FAVORITE, DELETE_FAVORITE */}
         <button className={cssClasses.join(' ')} value={value} onClick={(event) => this.handleFavoriteClick(event)}><i className='fas fa-star'></i></button>
         <span>{this.state.isUser}</span>
       </div>
