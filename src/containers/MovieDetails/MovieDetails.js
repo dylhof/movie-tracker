@@ -7,18 +7,18 @@ import { addFavorite, deleteFavorite } from '../../actions';
 export class MovieDetails extends Component{
 
   handleFavoriteClick = (event) => {
-    const { title, id, poster_path, release_date, vote_average, overview } = this.props
+    const { title, id, poster_path, release_date, vote_average, overview, currentUser } = this.props
 
-    if (this.props.currentUser && event.target.value === 'true') {
-      const { userID } = this.props.currentUser
+    if (currentUser && event.target.value === 'true') {
+      const { userID } = currentUser
       try {
         helper.tryUnfavorite(id, userID)
         this.props.dispatchDeleteFavorite(id)
       } catch (error) {
         this.props.dispatchSetError(error.message)
       }
-    } else if (this.props.currentUser && event.target.value === 'false') {
-      const { userID } = this.props.currentUser
+    } else if (currentUser && event.target.value === 'false') {
+      const { userID } = currentUser
       try {
         helper.tryFavorite(title, id, userID, poster_path, release_date, vote_average, overview)
         this.props.dispatchAddFavorite(id)
