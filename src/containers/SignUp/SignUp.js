@@ -9,10 +9,10 @@ export class SignUp extends Component {
     this.state = {
       name: '',
       username: '',
-      password: '',
-      error: ''
+      password: ''
     }
   }
+  
   handleChange = (event) => {
     if (event.target.name === 'username') {
       this.setState({ username: event.target.value })
