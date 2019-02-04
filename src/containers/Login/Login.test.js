@@ -1,9 +1,9 @@
 import React from 'react'
-import {shallow} from 'enzyme'
-import {Login} from './Login'
-import { mapDispatchToProps} from './Login'
+import { shallow } from 'enzyme'
+import { Login } from './Login'
+import { mapDispatchToProps } from './Login'
 import * as API from '../../helper/apiCall'
-import { format } from 'util';
+import * as actions from '../../actions/index'
 
 describe('Login', () => {
   let wrapper
@@ -11,7 +11,7 @@ describe('Login', () => {
     const mockDispatchAddAllUserFavorites = jest.fn()
     const mockDispatchSetCurrentUser = jest.fn()
     wrapper = shallow(
-      <Login 
+      <Login
         dispatchSetCurrentUser={mockDispatchSetCurrentUser}
         dispatchAddAllUserFavorites={mockDispatchAddAllUserFavorites}
       />
@@ -24,7 +24,7 @@ describe('Login', () => {
 
   it('should have initial state', () => {
     //setup
-    const expected = {username: '', password: ''}
+    const expected = { username: '', password: '' }
     //expectation
     expect(wrapper.state()).toEqual(expected)
   })
@@ -39,7 +39,7 @@ describe('Login', () => {
   describe('handleChange', () => {
     it('should set state of username', () => {
       //setup
-      const mockEvent = {target: {name: 'username', value: 'Dylan'}}
+      const mockEvent = { target: { name: 'username', value: 'Dylan' } }
       //execution
       wrapper.instance().handleChange(mockEvent)
       //expectation
@@ -48,7 +48,7 @@ describe('Login', () => {
 
     it('should set state of password', () => {
       //setup
-      const mockEvent = {target: {name: 'password', value: 'Dylan'}}
+      const mockEvent = { target: { name: 'password', value: 'Dylan' } }
       //execution
       wrapper.instance().handleChange(mockEvent)
       //expectation
@@ -59,7 +59,7 @@ describe('Login', () => {
   describe('handleSubmit', () => {
     let mockEvent
     beforeEach(() => {
-      mockEvent = Object.assign(jest.fn(), {preventDefault: () => {}})
+      mockEvent = Object.assign(jest.fn(), { preventDefault: () => { } })
     })
     it('should call fetchPost', () => {
       //setup
@@ -72,7 +72,7 @@ describe('Login', () => {
 
     it('should call dispatchSetCurrentUser with the correct params', async () => {
       //setup
-      const mockResponse = {data: {name: 'Matt', id: 2}}
+      const mockResponse = { data: { name: 'Matt', id: 2 } }
       API.fetchPost = jest.fn().mockImplementation(() => Promise.resolve(mockResponse))
       //execution
       await wrapper.instance().handleSubmit(mockEvent)
@@ -83,7 +83,7 @@ describe('Login', () => {
     it('should call fetchData', async () => {
       //setup
       API.fetchData = jest.fn()
-      const mockResponse = {data: {name: 'Matt', id: 2}}
+      const mockResponse = { data: { name: 'Matt', id: 2 } }
       API.fetchPost = jest.fn().mockImplementation(() => Promise.resolve(mockResponse))
       //execution
       await wrapper.instance().handleSubmit(mockEvent)
@@ -93,14 +93,40 @@ describe('Login', () => {
 
     it('should call dispatchAddAllUserFavorites with the correct params', async () => {
       //setup
-      const mockResponse = {data: {name: 'Matt', id: 2}}
-      const mockFavoritesData = {data: [{title: 'AquaMan', movie_id: 1}, {title: 'Serenity', movie_id: 3}]}
+      const mockResponse = { data: { name: 'Matt', id: 2 } }
+      const mockFavoritesData = { data: [{ title: 'AquaMan', movie_id: 1 }, { title: 'Serenity', movie_id: 3 }] }
       API.fetchPost = jest.fn().mockImplementation(() => Promise.resolve(mockResponse))
       API.fetchData = jest.fn().mockImplementation(() => Promise.resolve(mockFavoritesData))
       //execution
       await wrapper.instance().handleSubmit(mockEvent)
       //expectation
       expect(wrapper.instance().props.dispatchAddAllUserFavorites).toHaveBeenCalledWith([1, 3])
+    })
+  })
+
+  describe('mapDispatchToProps', () => {
+
+    it('should call dispatch when calling dispatchSetCurrentUser from mdtp', () => {
+      //setup
+      const mockDispatch = jest.fn()
+      const actionToDispatch = actions.setCurrentUser('Matt', 1)
+      //execution
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.dispatchSetCurrentUser('Matt', 1)
+      //expectation
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+
+    })
+
+    it('should call dispatch when calling dispatchAddAllUserFavorites from mdtp', () => {
+      //setup
+      const mockDispatch = jest.fn()
+      const actionToDispatch = actions.addAllUserFavorites([1, 3])
+      //execution
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.dispatchAddAllUserFavorites([1, 3])
+      //expectation
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
     })
   })
 })
