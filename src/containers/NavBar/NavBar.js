@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { logoutCurrentUser, clearFavorites } from '../../actions';
 
-class NavBar extends Component {
+export class NavBar extends Component {
   // constructor() {
   //   super()
   // }
@@ -12,6 +12,7 @@ class NavBar extends Component {
     this.props.dispatchLogoutUser()
     this.props.dispatchClearFavorites()
   }
+
   render() {
     return (
       <div className="NavBar">
@@ -21,7 +22,7 @@ class NavBar extends Component {
       </NavLink>
         {
           this.props.currentUser ?
-            <button onClick={this.handleLogoutClick}>Logout</button>
+            <button className='logout-btn' onClick={this.handleLogoutClick}>Logout</button>
             :
             <div>
               <NavLink exact to='/login'>Login</NavLink>
