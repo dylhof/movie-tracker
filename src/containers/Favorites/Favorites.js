@@ -4,13 +4,12 @@ import MovieCard from '../MovieCard/MovieCard';
 
 export class Favorites extends Component {
   render() {
-    const { movies, favorites, currentUser } = this.props
+    const { movies, favorites } = this.props
     const displayFavorites = movies
       .filter(movie => favorites.includes(movie.id))
       .map(movie => {
-
         return (
-          <MovieCard {...movie} key={movie.id} favorites={[movie.id]} currentUser={currentUser}/>
+          <MovieCard {...movie} key={movie.id} />
         )
       })
 
@@ -22,8 +21,7 @@ export class Favorites extends Component {
 
 export const mapStateToProps = (state) => ({
   movies: state.movies,
-  favorites: state.favorites,
-  currentUser: state.currentUser
+  favorites: state.favorites
 })
 
 export default connect(mapStateToProps)(Favorites)

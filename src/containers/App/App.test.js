@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux';
 import { rootReducer } from '../../reducers'
 import { BrowserRouter } from 'react-router-dom';
-import { mapStateToProps } from '../NavBar/NavBar';
+import { mapStateToProps } from './App';
 import * as api from '../../helper/apiCall'
 
 describe('App', () => {
