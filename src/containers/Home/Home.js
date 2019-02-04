@@ -21,7 +21,3 @@ export const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(Home)
-
-
-// display all movies in store
-// favorite funtionality will live on movie card

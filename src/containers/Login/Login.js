@@ -8,8 +8,7 @@ export class Login extends Component {
     super()
     this.state = {
       username: '',
-      password: '',
-      error: ''
+      password: ''
     }
   }
   handleChange = (event) => {
@@ -19,12 +18,6 @@ export class Login extends Component {
       this.setState({ password: event.target.value })
     }
   }
-
-  //   sign in   /api/users
-  // Create Account - /api/users / new
-  //   Add Favorite - /api/users / favorites / new
-  //   Receive All Favorites - /api/users /: user_id / favorites
-  // Delete a Favorite - /api/users /: user_id / favorites /: movie_id
 
   handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,19 +30,11 @@ export class Login extends Component {
             'Content-Type': 'application/json'
           }
         })
-
-        // if(!response.ok) {
-        //   throw Error(response.statusText)
-        // }
-        const user_id = response.data.id
-        this.props.dispatchSetCurrentUser(response.data.name, user_id)
-        // debugger
-
+      const user_id = response.data.id
+      this.props.dispatchSetCurrentUser(response.data.name, user_id)
       const url = `http://localhost:3000/api/users/${user_id}/favorites`
       const favoritesResponse = await fetchData(url)
-       console.log(favoritesResponse)
-      //  debugger
-        const favoriteIDs = favoritesResponse.data.map(favorite => favorite.movie_id)
+      const favoriteIDs = favoritesResponse.data.map(favorite => favorite.movie_id)
       this.props.dispatchAddAllUserFavorites(favoriteIDs)
     } catch (error) {
       if (error.message === '500') {
@@ -63,7 +48,7 @@ export class Login extends Component {
       <form onSubmit={this.handleSubmit}>
         <input name='username' value={this.state.username} onChange={this.handleChange} />
         <input name='password' value={this.state.password} onChange={this.handleChange} />
-        <button>Submit</button>
+        <button className='login-submit'>Submit</button>
         <span>{this.state.error}</span>
       </form>
     )
