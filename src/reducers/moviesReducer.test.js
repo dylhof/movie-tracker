@@ -15,9 +15,9 @@ describe('moviesReducer', () => {
   it('should get the movies', () => {
     //setup
     const initialState = []
-    const expected = [{title: 'Aquaman'}]
+    const expected = [{ title: 'Aquaman' },{ title: "Bohemian Rhapsody" }]
   //execution
-    const result = moviesReducer(initialState, actions.storeMovies(expected))
+    const result = moviesReducer(initialState, actions.storeMovies([{ title: 'Aquaman' },{ title: "Bohemian Rhapsody"}]))
     //expectation
     expect(result).toEqual(expected)
   })

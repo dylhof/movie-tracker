@@ -17,7 +17,7 @@ describe('errorReducer', () => {
     const initialState = ''
     const expected = { message: "Something isn't working" }
     //execution
-    const result = errorReducer(initialState, actions.setError(expected))
+    const result = errorReducer(initialState, actions.setError({ message: "Something isn't working" }))
     //expectation
     expect(result).toEqual(expected)
   })
