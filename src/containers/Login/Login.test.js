@@ -29,12 +29,12 @@ describe('Login', () => {
     expect(wrapper.state()).toEqual(expected)
   })
 
-  // it('should call handleSubmit when submit button is clicked', () => {
-  //   // const mockEvent = Object.assign(jest.fn(), {preventDefault: () => {}})
-  //   wrapper.instance().handleSubmit = jest.fn()
-  //  wrapper.find('form').simulate('submit')
-  //   expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
-  // })
+  it('should call handleSubmit when submit button is clicked', () => {
+    // const mockEvent = Object.assign(jest.fn(), {preventDefault: () => {}})
+    wrapper.instance().handleSubmit = jest.fn()
+   wrapper.find('form').simulate('submit')
+    expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
+  })
 
   describe('handleChange', () => {
     it('should set state of username', () => {

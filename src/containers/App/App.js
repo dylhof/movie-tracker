@@ -35,9 +35,12 @@ export class App extends Component {
     return (
       <div className="App">
         <NavBar />
+        <div className='error'>
+
         {
           this.props.error && this.props.error
         }
+        </div>
         {
           this.props.isLoading ? <div>...Loading</div>
             :

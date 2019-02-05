@@ -57,8 +57,8 @@ export class SignUp extends Component {
             <input id='signup-email' className='signup-input' name='username' value={this.state.username} onChange={this.handleChange} />
           </div>
           <div className='signup-inner-div'>
-            <label className='signup-label' for='signup-password'>Email</label>
-            <input id='signup-password' className='signup-input' value={this.state.password} onChange={this.handleChange} />
+            <label className='signup-label' for='signup-password'>Password</label>
+            <input id='signup-password' className='signup-input' name='password' value={this.state.password} onChange={this.handleChange} />
           </div>
           <button className='signup-submit'>Submit</button>
           <span>{this.state.error}</span>
