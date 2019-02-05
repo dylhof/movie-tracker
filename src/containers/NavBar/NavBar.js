@@ -14,19 +14,21 @@ export class NavBar extends Component {
   render() {
     return (
       <div className="NavBar">
-        <NavLink exact to="/">Home</NavLink>
-        <NavLink exact to={(this.props.currentUser) ? '/favorites' : '/login'}>
-          Favorites
-      </NavLink>
-        {
-          this.props.currentUser ?
-            <button className='logout-btn' onClick={this.handleLogoutClick}>Logout</button>
-            :
-            <div>
-              <NavLink exact to='/login'>Login</NavLink>
-              <NavLink exact to='/signUp'>Sign up</NavLink>
-            </div>
-        }
+        <NavLink className='nav-link' exact to="/"><div className="home-btn">Movie Tracker</div></NavLink>
+        <div className="small-btns">
+          <NavLink className='nav-link' exact to={(this.props.currentUser) ? '/favorites' : '/login'}>
+            <div className="favorites-btn">Favorites</div>
+          </NavLink>
+          {
+            this.props.currentUser ?
+              <div className='logout-btn' onClick={this.handleLogoutClick}>Logout</div>
+              :
+              <div className="signup-login-btns">
+                <NavLink className='nav-link' exact to='/login'><div className="login-btn">Login</div></NavLink>
+                <NavLink className='nav-link' exact to='/signUp'><div className="signup-btn">Sign up</div></NavLink>
+              </div>
+          }
+        </div>
       </div>
     );
   }
