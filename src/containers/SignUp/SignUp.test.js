@@ -8,9 +8,11 @@ describe('SignUp', () => {
   let wrapper
   beforeEach(() => {
     const mockDispatchSetCurrentUser = jest.fn()
+    const mockDispatchSetError = jest.fn()
     wrapper = shallow(
       <SignUp
         dispatchSetCurrentUser={mockDispatchSetCurrentUser}
+        dispatchSetError={mockDispatchSetError}
       />
     )
   })
@@ -112,6 +114,17 @@ describe('SignUp', () => {
       //execution
       const mappedProps = mapDispatchToProps(mockDispatch)
       mappedProps.dispatchSetCurrentUser('Matt', 1)
+      //expectation
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
+
+    it('should call dispatch when calling dispatchSetError from mdtp', () => {
+      //setup
+      const mockDispatch = jest.fn()
+      const actionToDispatch = actions.setError('Something went wrong')
+      //execution
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.dispatchSetError('Something went wrong')
       //expectation
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
     })
