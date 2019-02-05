@@ -40,19 +40,24 @@ export class MovieDetails extends Component{
   }
   
   render() {
-    const {title, release_date, overview, poster_path, favorites, id} = this.props
-    const poster = `https://image.tmdb.org/t/p/w200/${poster_path}`
+    const {title, release_date, overview, backdrop_path, favorites, vote_average, id} = this.props
+    const poster = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
     const alt = `${title} poster`
     const cssClasses = ["favorite-btn", favorites.includes(id) ? "isFavorite" : null]
     const value = favorites.includes(id) ? true : false
 
     return (
-      <div>
-        <button className={cssClasses.join(' ')} value={value} onClick={(event) => this.handleFavoriteClick(event)}><i className='fas fa-star'></i></button>
-        <h3>{title}</h3>
+      <div className='movie-details-div'>
         <img src={poster} alt={alt} />
-        <p>{release_date}</p>
-        <p>{overview}</p>
+        <div>
+          <div className='movie-details-title-div'>
+            <h2>{title}</h2>
+            <button className={cssClasses.join(' ')} value={value} onClick={(event) => this.handleFavoriteClick(event)}><i className='fas fa-star'></i></button>
+          </div>
+          <p className='overview'>{overview}</p>
+          <p>Original Release Date: {release_date}</p>
+          <p>The Movie DataBase Vote Average: {vote_average}</p>
+        </div>
       </div>
     )
   }
