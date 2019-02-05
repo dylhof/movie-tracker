@@ -13,11 +13,8 @@ export class Login extends Component {
     }
   }
   handleChange = (event) => {
-    if (event.target.name === 'username') {
-      this.setState({ username: event.target.value })
-    } else {
-      this.setState({ password: event.target.value })
-    }
+    const { name, value } = event.target
+    this.setState({ [name]: value })
   }
 
   handleSubmit = async (event) => {
