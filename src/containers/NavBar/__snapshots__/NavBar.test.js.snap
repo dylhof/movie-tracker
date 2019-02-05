@@ -30,7 +30,8 @@ exports[`NavBar should match the snapshot 1`] = `
       <div
         className="favorites-btn"
       >
-        Favorites
+        Favorites 
+        3
       </div>
     </NavLink>
     <div
@@ -73,7 +74,7 @@ exports[`NavBar should match the snapshot with no current user 1`] = `
       <div
         className="favorites-btn"
       >
-        Favorites
+        Favorites 
       </div>
     </NavLink>
     <div
