@@ -37,8 +37,9 @@ export class Login extends Component {
       const favoritesResponse = await fetchData(url)
       const favoriteIDs = favoritesResponse.data.map(favorite => favorite.movie_id)
       this.props.dispatchAddAllUserFavorites(favoriteIDs)
+      this.props.dispatchSetError('')
     } catch (error) {
-      this.props.dispatchSetError(error.message)
+      this.props.dispatchSetError('Your email and password do not match!')
     }
   }
 

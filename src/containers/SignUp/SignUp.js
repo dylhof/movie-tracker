@@ -36,9 +36,10 @@ export class SignUp extends Component {
           }
         })
       this.props.dispatchSetCurrentUser(this.state.name, response.id)
+      this.props.dispatchSetError('')
       this.setState({ name: '', username: '', password: '' })
     } catch (error) {
-      this.props.dispatchSetError(error.message)
+      this.props.dispatchSetError('This email already exists!')
     }
   }
 
