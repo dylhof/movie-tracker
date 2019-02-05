@@ -49,15 +49,15 @@ export class SignUp extends Component {
       <div className='signup-form-div'>
         <form className='signup-form' onSubmit={this.handleSubmit}>
           <div className='signup-inner-div'>
-            <label className='signup-label' for='signup-name'>Name</label>
+            <label className='signup-label' htmlFor='signup-name'>Name</label>
             <input id='signup-name' className='signup-input' name='name' value={this.state.name} onChange={this.handleChange} />
           </div>
           <div className='signup-inner-div'>
-            <label className='signup-label' for='signup-email'>Email</label>
+            <label className='signup-label' htmlFor='signup-email'>Email</label>
             <input id='signup-email' className='signup-input' name='username' value={this.state.username} onChange={this.handleChange} />
           </div>
           <div className='signup-inner-div'>
-            <label className='signup-label' for='signup-password'>Password</label>
+            <label className='signup-label' htmlFor='signup-password'>Password</label>
             <input id='signup-password' className='signup-input' name='password' value={this.state.password} onChange={this.handleChange} />
           </div>
           <button className='signup-submit'>Submit</button>

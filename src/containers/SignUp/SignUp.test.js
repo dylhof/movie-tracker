@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import { SignUp, mapDispatchToProps } from './SignUp'
 import * as API from '../../helper/apiCall'
 import * as actions from '../../actions/index'
@@ -24,6 +24,18 @@ describe('SignUp', () => {
     const expected = { name: '', username: '', password: '' }
     //expectation
     expect(wrapper.state()).toEqual(expected)
+  })
+
+  it('should call handleSubmit when submit button is clicked', () => {
+    //setup
+    wrapper = mount(<SignUp />)
+    const spy = spyOn(wrapper.instance(), 'handleSubmit')
+    const mockEvent = {preventDefault: jest.fn}
+    wrapper.instance().forceUpdate()
+    //execution
+    wrapper.find('form').simulate('submit', mockEvent)
+    //expectation
+    expect(spy).toHaveBeenCalled()
   })
   
   describe('handleChange', () => {
