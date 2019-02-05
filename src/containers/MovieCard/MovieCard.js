@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { addFavorite, deleteFavorite, setError } from '../../actions';
 import { Link } from 'react-router-dom';
 import * as helper from '../../helper/helpers'
+import PropTypes from 'prop-types'
 
 export class MovieCard extends Component {
   constructor() {
@@ -72,10 +73,11 @@ export const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieCard)
 
-
-
-// If the user is logged in
-  // check if the movie is a favorite
-    // yes=> display with favorite indicated
-// this will display a single movie 
-// 
+MovieCard.propTypes = {
+  dispatchAddFavorite: PropTypes.func,
+  dispatchDeleteFavorite: PropTypes.func,
+  dispatchSetError: PropTypes.func,
+  currentUser: PropTypes.object,
+  favorites: PropTypes.array,
+  error: PropTypes.string
+}

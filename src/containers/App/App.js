@@ -10,9 +10,9 @@ import MovieDetails from '../MovieDetails/MovieDetails'
 import { fetchData } from '../../helper/apiCall'
 import { storeMovies, setLoading, setError } from '../../actions'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
 
 export class App extends Component {
-
 
   fetchAndStoreMovies = async () => {
     this.props.dispatchSetLoading(true)
@@ -35,43 +35,44 @@ export class App extends Component {
     return (
       <div className="App">
         <NavBar />
-
-        {this.props.error && this.props.error}
+        {
+          this.props.error && this.props.error
+        }
         {
           this.props.isLoading ? <div>...Loading</div>
-          :
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/favorites' render={() => (
-            this.props.currentUser ? (
-              <Favorites />
-            ) : (
-                <Redirect to='/login' />
-              )
-          )} />
+            :
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route path='/favorites' render={() => (
+                this.props.currentUser ? (
+                  <Favorites />
+                ) : (
+                    <Redirect to='/login' />
+                  )
+              )} />
 
-          <Route path='/login' render={() => (
-            this.props.currentUser ? (
-              <Redirect to='/' />
-            ) : (
-                <Login />
-              )
-          )} />
-          <Route path='/signUp' render={() => (
-            this.props.currentUser ? (
-              <Redirect to='/' />
-            ) : (
-                <SignUp />
-              )
-          )} />
-          <Route path='/movie/:id' render={({ match }) => {
-            const { id } = match.params
-            const movie = this.props.movies.find(movie => movie.id === parseInt(id))
-            if (movie) {
-              return <MovieDetails {...movie} /> 
-            }
-          }} />
-        </Switch>
+              <Route path='/login' render={() => (
+                this.props.currentUser ? (
+                  <Redirect to='/' />
+                ) : (
+                    <Login />
+                  )
+              )} />
+              <Route path='/signUp' render={() => (
+                this.props.currentUser ? (
+                  <Redirect to='/' />
+                ) : (
+                    <SignUp />
+                  )
+              )} />
+              <Route path='/movie/:id' render={({ match }) => {
+                const { id } = match.params
+                const movie = this.props.movies.find(movie => movie.id === parseInt(id))
+                if (movie) {
+                  return <MovieDetails {...movie} />
+                }
+              }} />
+            </Switch>
         }
       </div>
     );
@@ -92,10 +93,11 @@ export const mapDispatchToProps = (dispatch) => ({
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
 
-
-
-// ComponentDidMount 
-    // this will check if they have a UN & PW in local storage
-        // if yes it will fetch their user info from back end
-    // this will make the initial movie fetch
-        //then put the movies in store
+App.propTypes = {
+  dispatchStoreMovies: PropTypes.func,
+  dispatchSetLoading: PropTypes.func,
+  dispatchSetError: PropTypes.func,
+  currentUser: PropTypes.object,
+  error: PropTypes.string,
+  movies: PropTypes.array
+}

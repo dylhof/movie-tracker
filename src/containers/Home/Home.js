@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MovieCard from '../MovieCard/MovieCard'
+import PropTypes from 'prop-types'
 
 export class Home extends Component {
 
@@ -21,3 +22,7 @@ export const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(Home)
+
+Home.propTypes = {
+  movies: PropTypes.array
+}

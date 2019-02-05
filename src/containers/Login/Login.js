@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { fetchPost, fetchData } from '../../helper/apiCall'
 import { setCurrentUser, addAllUserFavorites } from '../../actions';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
 
 export class Login extends Component {
   constructor() {
@@ -62,18 +63,7 @@ export const mapDispatchToProps = (dispatch) => ({
 
 export default connect(null, mapDispatchToProps)(Login)
 
-// login form:
-// local state to store what they are typing in (control form)
-// username field
-// password field
-// submit/ login button
-// link to sign up form
-
-
-// sign up form:
-// local storage (control form)
-// name field
-// username field
-// pw field
-// submit/signup
-// link to log in
+Login.propTypes = {
+  dispatchSetCurrentUser: PropTypes.func,
+  dispatchAddAllUserFavorites: PropTypes.func
+}
