@@ -45,13 +45,15 @@ export class MovieCard extends Component {
     const poster = `https://image.tmdb.org/t/p/w200/${poster_path}`
     const alt = `${title} poster`
     return (
-      <div>
-        <h2>{title}</h2>
+      <div className='movie-card'>
+        <div className='title-favorite-div'>
+          <h2>{title}</h2>
+          <button className={cssClasses.join(' ')} value={value} onClick={(event) => this.handleFavoriteClick(event)}><i className='fas fa-star'></i></button>
+          <span>{this.state.isUser}</span>
+        </div>
         <Link to={`/movie/${id}`}>
-          <img src={poster} alt={alt} />
+          <img className='movie-poster' src={poster} alt={alt} />
         </Link>
-        <button className={cssClasses.join(' ')} value={value} onClick={(event) => this.handleFavoriteClick(event)}><i className='fas fa-star'></i></button>
-        <span>{this.state.isUser}</span>
       </div>
     )
   }
@@ -60,13 +62,13 @@ export class MovieCard extends Component {
 export const mapStateToProps = (state) => ({
   currentUser: state.currentUser,
   favorites: state.favorites,
-  error: state.error
+  error: state.error,
 })
 
 export const mapDispatchToProps = (dispatch) => ({
   dispatchAddFavorite: (id) => dispatch(addFavorite(id)),
   dispatchDeleteFavorite: (id) => dispatch(deleteFavorite(id)),
-  dispatchSetError: (message) => dispatch(setError(message)) 
+  dispatchSetError: (message) => dispatch(setError(message)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieCard)
