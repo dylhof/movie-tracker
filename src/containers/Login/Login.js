@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { fetchPost, fetchData } from '../../helper/apiCall'
-import { setCurrentUser, addAllUserFavorites } from '../../actions';
+import { setCurrentUser, addAllUserFavorites, setError } from '../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 
@@ -37,28 +37,29 @@ export class Login extends Component {
       const favoritesResponse = await fetchData(url)
       const favoriteIDs = favoritesResponse.data.map(favorite => favorite.movie_id)
       this.props.dispatchAddAllUserFavorites(favoriteIDs)
+      this.props.dispatchSetError('')
     } catch (error) {
-      if (error.message === '500') {
-        this.setState({ error: "Email or Password doesn't match" })
-      }
+      this.props.dispatchSetError('Your email and password do not match!')
     }
   }
 
   render() {
+    const { error } = this.props
+    const { username, password } = this.state
     return (
       <div className='login-form-div'>
-      <form className='login-form' onSubmit={this.handleSubmit}>
-        <div className='login-inner-div'>
-          <label htmlFor='login-email' className='login-label'>Email</label>
-          <input id='login-email' className='login-input' name='username' value={this.state.username} onChange={this.handleChange} type='email'/>
-        </div>
-        <div className='login-inner-div'>
-          <label htmlFor='login-password' className='login-label'>Password</label>
-          <input id='login-password' className='login-input' name='password' value={this.state.password} onChange={this.handleChange} />
-        </div>
-        <button className='login-submit'>Submit</button>
-        <span>{this.state.error}</span>
-      </form>
+        <form className='login-form' onSubmit={this.handleSubmit}>
+          <div className='login-inner-div'>{error}</div>
+          <div className='login-inner-div'>
+            <label htmlFor='login-email' className='login-label'>Email</label>
+            <input id='login-email' className='login-input' name='username' value={username} onChange={this.handleChange} type='email' />
+          </div>
+          <div className='login-inner-div'>
+            <label htmlFor='login-password' className='login-label'>Password</label>
+            <input id='login-password' className='login-input' name='password' value={password} onChange={this.handleChange} />
+          </div>
+          <button className='login-submit'>Submit</button>
+        </form>
       </div>
     )
   }
@@ -66,12 +67,14 @@ export class Login extends Component {
 
 export const mapDispatchToProps = (dispatch) => ({
   dispatchSetCurrentUser: (name, id) => dispatch(setCurrentUser(name, id)),
-  dispatchAddAllUserFavorites: (favorites) => dispatch(addAllUserFavorites(favorites))
+  dispatchAddAllUserFavorites: (favorites) => dispatch(addAllUserFavorites(favorites)),
+  dispatchSetError: (message) => dispatch(setError(message))
 })
 
 export default connect(null, mapDispatchToProps)(Login)
 
 Login.propTypes = {
   dispatchSetCurrentUser: PropTypes.func,
-  dispatchAddAllUserFavorites: PropTypes.func
+  dispatchAddAllUserFavorites: PropTypes.func,
+  dispatchSetError: PropTypes.func
 }

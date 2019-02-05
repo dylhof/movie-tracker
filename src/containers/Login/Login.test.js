@@ -1,7 +1,6 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
-import { Login } from './Login'
-import { mapDispatchToProps } from './Login'
+import { Login, mapDispatchToProps } from './Login'
 import * as API from '../../helper/apiCall'
 import * as actions from '../../actions/index'
 
@@ -10,10 +9,12 @@ describe('Login', () => {
   beforeEach(() => {
     const mockDispatchAddAllUserFavorites = jest.fn()
     const mockDispatchSetCurrentUser = jest.fn()
+    const mockDispatchSetError = jest.fn()
     wrapper = shallow(
       <Login
         dispatchSetCurrentUser={mockDispatchSetCurrentUser}
         dispatchAddAllUserFavorites={mockDispatchAddAllUserFavorites}
+        dispatchSetError={mockDispatchSetError}
       />
     )
   })
@@ -129,6 +130,17 @@ describe('Login', () => {
       //execution
       const mappedProps = mapDispatchToProps(mockDispatch)
       mappedProps.dispatchAddAllUserFavorites([1, 3])
+      //expectation
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
+
+    it('should call dispatch when calling dispatchSetError from mdtp', () => {
+      //setup
+      const mockDispatch = jest.fn()
+      const actionToDispatch = actions.setError('Something went wrong')
+      //execution
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.dispatchSetError('Something went wrong')
       //expectation
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
     })

@@ -10,6 +10,9 @@ exports[`Login should match the snapshot 1`] = `
   >
     <div
       className="login-inner-div"
+    />
+    <div
+      className="login-inner-div"
     >
       <label
         className="login-label"
@@ -48,7 +51,6 @@ exports[`Login should match the snapshot 1`] = `
     >
       Submit
     </button>
-    <span />
   </form>
 </div>
 `;
