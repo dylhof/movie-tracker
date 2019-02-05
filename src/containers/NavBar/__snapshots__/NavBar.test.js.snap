@@ -7,25 +7,39 @@ exports[`NavBar should match the snapshot 1`] = `
   <NavLink
     activeClassName="active"
     aria-current="page"
+    className="nav-link"
     exact={true}
     to="/"
   >
-    Home
+    <div
+      className="home-btn"
+    >
+      Movie Tracker
+    </div>
   </NavLink>
-  <NavLink
-    activeClassName="active"
-    aria-current="page"
-    exact={true}
-    to="/favorites"
+  <div
+    className="small-btns"
   >
-    Favorites
-  </NavLink>
-  <button
-    className="logout-btn"
-    onClick={[Function]}
-  >
-    Logout
-  </button>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      className="nav-link"
+      exact={true}
+      to="/favorites"
+    >
+      <div
+        className="favorites-btn"
+      >
+        Favorites
+      </div>
+    </NavLink>
+    <div
+      className="logout-btn"
+      onClick={[Function]}
+    >
+      Logout
+    </div>
+  </div>
 </div>
 `;
 
@@ -36,36 +50,62 @@ exports[`NavBar should match the snapshot with no current user 1`] = `
   <NavLink
     activeClassName="active"
     aria-current="page"
+    className="nav-link"
     exact={true}
     to="/"
   >
-    Home
+    <div
+      className="home-btn"
+    >
+      Movie Tracker
+    </div>
   </NavLink>
-  <NavLink
-    activeClassName="active"
-    aria-current="page"
-    exact={true}
-    to="/login"
+  <div
+    className="small-btns"
   >
-    Favorites
-  </NavLink>
-  <div>
     <NavLink
       activeClassName="active"
       aria-current="page"
+      className="nav-link"
       exact={true}
       to="/login"
     >
-      Login
+      <div
+        className="favorites-btn"
+      >
+        Favorites
+      </div>
     </NavLink>
-    <NavLink
-      activeClassName="active"
-      aria-current="page"
-      exact={true}
-      to="/signUp"
+    <div
+      className="signup-login-btns"
     >
-      Sign up
-    </NavLink>
+      <NavLink
+        activeClassName="active"
+        aria-current="page"
+        className="nav-link"
+        exact={true}
+        to="/login"
+      >
+        <div
+          className="login-btn"
+        >
+          Login
+        </div>
+      </NavLink>
+      <NavLink
+        activeClassName="active"
+        aria-current="page"
+        className="nav-link"
+        exact={true}
+        to="/signUp"
+      >
+        <div
+          className="signup-btn"
+        >
+          Sign up
+        </div>
+      </NavLink>
+    </div>
   </div>
 </div>
 `;

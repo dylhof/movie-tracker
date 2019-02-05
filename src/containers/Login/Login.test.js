@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import { Login } from './Login'
 import { mapDispatchToProps } from './Login'
 import * as API from '../../helper/apiCall'
@@ -30,10 +30,15 @@ describe('Login', () => {
   })
 
   it('should call handleSubmit when submit button is clicked', () => {
-    // const mockEvent = Object.assign(jest.fn(), {preventDefault: () => {}})
-    wrapper.instance().handleSubmit = jest.fn()
-   wrapper.find('form').simulate('submit')
-    expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
+    //setup
+    wrapper = mount(<Login />)
+    const spy = spyOn(wrapper.instance(), 'handleSubmit')
+    const mockEvent = {preventDefault: jest.fn}
+    wrapper.instance().forceUpdate()
+    //execution
+    wrapper.find('form').simulate('submit', mockEvent)
+    //expectation
+    expect(spy).toHaveBeenCalled()
   })
 
   describe('handleChange', () => {

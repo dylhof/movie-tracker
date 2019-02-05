@@ -1,27 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SignUp should match the snapshot 1`] = `
-<form
-  onSubmit={[Function]}
+<div
+  className="signup-form-div"
 >
-  <input
-    name="name"
-    onChange={[Function]}
-    value=""
-  />
-  <input
-    name="username"
-    onChange={[Function]}
-    value=""
-  />
-  <input
-    name="password"
-    onChange={[Function]}
-    value=""
-  />
-  <button>
-    Submit
-  </button>
-  <span />
-</form>
+  <form
+    className="signup-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="signup-inner-div"
+    >
+      <label
+        className="signup-label"
+        htmlFor="signup-name"
+      >
+        Name
+      </label>
+      <input
+        className="signup-input"
+        id="signup-name"
+        name="name"
+        onChange={[Function]}
+        value=""
+      />
+    </div>
+    <div
+      className="signup-inner-div"
+    >
+      <label
+        className="signup-label"
+        htmlFor="signup-email"
+      >
+        Email
+      </label>
+      <input
+        className="signup-input"
+        id="signup-email"
+        name="username"
+        onChange={[Function]}
+        value=""
+      />
+    </div>
+    <div
+      className="signup-inner-div"
+    >
+      <label
+        className="signup-label"
+        htmlFor="signup-password"
+      >
+        Password
+      </label>
+      <input
+        className="signup-input"
+        id="signup-password"
+        name="password"
+        onChange={[Function]}
+        value=""
+      />
+    </div>
+    <button
+      className="signup-submit"
+    >
+      Submit
+    </button>
+    <span />
+  </form>
+</div>
 `;
