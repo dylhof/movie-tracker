@@ -46,12 +46,20 @@ export class Login extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input name='username' value={this.state.username} onChange={this.handleChange} />
-        <input name='password' value={this.state.password} onChange={this.handleChange} />
+      <div className='login-form-div'>
+      <form className='login-form' onSubmit={this.handleSubmit}>
+        <div className='login-inner-div'>
+          <label for='login-email' className='login-label'>Email</label>
+          <input id='login-email' className='login-input' name='username' value={this.state.username} onChange={this.handleChange} type='email'/>
+        </div>
+        <div className='login-inner-div'>
+          <label for='login-password' className='login-label'>Password</label>
+          <input id='login-password' className='login-input' name='password' value={this.state.password} onChange={this.handleChange} />
+        </div>
         <button className='login-submit'>Submit</button>
         <span>{this.state.error}</span>
       </form>
+      </div>
     )
   }
 }
