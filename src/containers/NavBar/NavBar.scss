@@ -10,7 +10,11 @@
   font-size: 53px;
   margin: 15px;
   @include navbutton();
-  
+  &:hover {
+    background-color: #792a26;
+    color: #e5a55f;
+    border: 5px solid #e5a55f;
+  }
 }
 
 .small-btns {
@@ -31,6 +35,12 @@
 .logout-btn {
   height: 43px;
   @include navbutton();
+
+  &:hover {
+    background-color: #792a26;
+    color: #e5a55f;
+    border: 4px solid #e5a55f;
+  }
 }
 
 .favorites-btn,
