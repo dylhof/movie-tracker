@@ -1,0 +1,18 @@
+@mixin navbutton() {
+  background: $font-color;
+  border: 5px solid #B05245;
+  border-radius: 10px;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  box-shadow: 5px 5px 7px #2b0c0e;
+  text-shadow: 2px 2px 2px #955428;
+}
+
+
+
+
+
+

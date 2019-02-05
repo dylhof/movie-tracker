@@ -1,0 +1,54 @@
+.NavBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.home-btn {
+  width: 395px;
+  height: 87px;
+  font-size: 53px;
+  margin: 15px;
+  @include navbutton();
+  
+}
+
+.small-btns {
+  display: flex;
+  justify-content: space-between;
+  width: 405px;
+  
+  .signup-login-btns {
+    display: flex;
+    justify-content: space-between;
+    width: 66%;
+  }
+}
+
+.favorites-btn,
+.login-btn,
+.signup-btn,
+.logout-btn {
+  height: 43px;
+  @include navbutton();
+}
+
+.favorites-btn,
+.logout-btn {
+  width: 114px;
+}
+
+.login-btn,
+.signup-btn {
+ width: 114px;
+}
+
+.logout-btn {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.nav-link {
+  text-decoration: none;
+}
