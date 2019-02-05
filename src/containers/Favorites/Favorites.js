@@ -15,7 +15,7 @@ export class Favorites extends Component {
       })
 
     return (
-      <div>{displayFavorites}</div>
+      <div className='favorites'>{displayFavorites}</div>
     )
   }
 }
