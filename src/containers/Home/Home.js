@@ -11,7 +11,7 @@ export class Home extends Component {
       )
     })
     return (
-      <div>{movieCards}</div>
+      <div className='home'>{movieCards}</div>
     )
   }
 }
