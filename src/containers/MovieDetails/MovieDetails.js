@@ -1,29 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as helper from '../../helper/helpers'
-import { addFavorite, deleteFavorite } from '../../actions';
+import { addFavorite, deleteFavorite, setError } from '../../actions';
 
 
 export class MovieDetails extends Component{
+  constructor() {
+    super()
+    this.state = {
+      isUser: ''
+    }
+  }
 
-  handleFavoriteClick = (event) => {
+  handleFavoriteClick = async (event) => {
     const { title, id, poster_path, release_date, vote_average, overview, currentUser } = this.props
 
     if (currentUser && event.target.value === 'true') {
       const { userID } = currentUser
       try {
-        helper.tryUnfavorite(id, userID)
+        await helper.tryUnfavorite(id, userID)
         this.props.dispatchDeleteFavorite(id)
       } catch (error) {
-        this.props.dispatchSetError(error.message)
+        this.props.dispatchSetError('Sorry! Something went wrong and we couldn\'t remove this movie from your favorites')
+
       }
     } else if (currentUser && event.target.value === 'false') {
       const { userID } = currentUser
       try {
-        helper.tryFavorite(title, id, userID, poster_path, release_date, vote_average, overview)
+        await helper.tryFavorite(title, id, userID, poster_path, release_date, vote_average, overview)
         this.props.dispatchAddFavorite(id)
       } catch (error) {
-        this.props.dispatchSetError(error.message)
+        this.props.dispatchSetError('Sorry! Something went wrong and we couldn\'t add this movie to your favorites')
       }
     } else {
       this.setState({
@@ -54,11 +61,13 @@ export class MovieDetails extends Component{
 export const mapStateToProps = (state) => ({
   currentUser: state.currentUser,
   favorites: state.favorites,
+  error: state.error
 })
 
 export const mapDispatchToProps = (dispatch) => ({
   dispatchAddFavorite: (id) => dispatch(addFavorite(id)),
-  dispatchDeleteFavorite: (id) => dispatch(deleteFavorite(id))
+  dispatchDeleteFavorite: (id) => dispatch(deleteFavorite(id)),
+  dispatchSetError: (message) => dispatch(setError(message)) 
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails)

@@ -40,7 +40,7 @@ export class MovieCard extends Component {
   }
 
   render() {
-    const { title, poster_path, id, favorites, error } = this.props
+    const { title, poster_path, id, favorites } = this.props
     const cssClasses = ["favorite-btn", favorites.includes(id) ? "isFavorite" : null]
     const value = favorites.includes(id) ? true : false
     const poster = `https://image.tmdb.org/t/p/w200/${poster_path}`
