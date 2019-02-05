@@ -12,15 +12,16 @@ export class NavBar extends Component {
   }
 
   render() {
+    const {currentUser, favorites} = this.props
     return (
       <div className="NavBar">
         <NavLink className='nav-link' exact to="/"><div className="home-btn">Movie Tracker</div></NavLink>
         <div className="small-btns">
-          <NavLink className='nav-link' exact to={(this.props.currentUser) ? '/favorites' : '/login'}>
-            <div className="favorites-btn">Favorites</div>
+          <NavLink className='nav-link' exact to={(currentUser) ? '/favorites' : '/login'}>
+            <div className="favorites-btn">Favorites {currentUser ? favorites.length : null}</div>
           </NavLink>
           {
-            this.props.currentUser ?
+            currentUser ?
               <div className='logout-btn' onClick={this.handleLogoutClick}>Logout</div>
               :
               <div className="signup-login-btns">
@@ -40,7 +41,8 @@ export const mapDispatchToProps = (dispatch) => ({
 })
 
 export const mapStateToProps = (state) => ({
-  currentUser: state.currentUser
+  currentUser: state.currentUser,
+  favorites: state.favorites
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
