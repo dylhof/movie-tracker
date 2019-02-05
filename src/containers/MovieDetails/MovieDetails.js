@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as helper from '../../helper/helpers'
 import { addFavorite, deleteFavorite, setError } from '../../actions';
-
+import PropTypes from 'prop-types'
 
 export class MovieDetails extends Component{
   constructor() {
@@ -71,3 +71,12 @@ export const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails)
+
+MovieDetails.propTypes = {
+  dispatchAddFavorite: PropTypes.func,
+  dispatchDeleteFavorite: PropTypes.func,
+  dispatchSetError: PropTypes.func,
+  currentUser: PropTypes.object,
+  favorites: PropTypes.array,
+  error: PropTypes.string
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { fetchPost } from '../../helper/apiCall';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../../actions';
+import PropTypes from 'prop-types'
 
 export class SignUp extends Component {
   constructor() {
@@ -23,15 +24,8 @@ export class SignUp extends Component {
     }
   }
 
-  //   sign in   /api/users
-  // Create Account - /api/users / new
-  //   Add Favorite - /api/users / favorites / new
-  //   Receive All Favorites - /api/users /: user_id / favorites
-  // Delete a Favorite - /api/users /: user_id / favorites /: movie_id
-
   handleSubmit = async (event) => {
     event.preventDefault();
-    let allUsers
     try {
       const response = await fetchPost('http://localhost:3000/api/users/new',
         {
@@ -61,8 +55,6 @@ export class SignUp extends Component {
       </form>
     )
   }
-
-
 }
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -70,18 +62,7 @@ export const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(null, mapDispatchToProps)(SignUp)
-// SignUp form:
-// local state to store what they are typing in (control form)
-// username field
-// password field
-// submit/ login button
-// link to sign up form
 
-
-// sign up form:
-// local storage (control form)
-// name field
-// username field
-// pw field
-// submit/signup
-// link to log in
+SignUp.propTypes = {
+  dispatchSetCurrentUser: PropTypes.func
+}

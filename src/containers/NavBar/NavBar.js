@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { logoutCurrentUser, clearFavorites } from '../../actions';
+import PropTypes from 'prop-types'
 
 export class NavBar extends Component {
-  // constructor() {
-  //   super()
-  // }
 
-  handleLogoutClick = () =>{
+  handleLogoutClick = () => {
     this.props.dispatchLogoutUser()
     this.props.dispatchClearFavorites()
   }
@@ -44,3 +42,9 @@ export const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+
+NavBar.propTypes = {
+  dispatchLogoutUser: PropTypes.func,
+  dispatchClearFavorites: PropTypes.func,
+  currentUser: PropTypes.object
+}

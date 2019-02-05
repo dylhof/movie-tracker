@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MovieCard from '../MovieCard/MovieCard';
+import PropTypes from 'prop-types';
 
 export class Favorites extends Component {
   render() {
@@ -25,3 +26,8 @@ export const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(Favorites)
+
+Favorites.propTypes = {
+  favorites: PropTypes.array,
+  movies: PropTypes.array
+}
