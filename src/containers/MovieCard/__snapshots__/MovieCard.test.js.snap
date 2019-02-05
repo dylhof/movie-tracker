@@ -1,26 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MovieCard should match the snapshot 1`] = `
-<div>
-  <h2 />
+<div
+  className="movie-card"
+>
+  <div
+    className="title-favorite-div"
+  >
+    <h2 />
+    <button
+      className="favorite-btn "
+      onClick={[Function]}
+      value={false}
+    >
+      <i
+        className="fas fa-star"
+      />
+    </button>
+    <span
+      className="error"
+    />
+  </div>
   <Link
     replace={false}
     to="/movie/undefined"
   >
     <img
       alt="undefined poster"
+      className="movie-poster"
       src="https://image.tmdb.org/t/p/w200/undefined"
     />
   </Link>
-  <button
-    className="favorite-btn "
-    onClick={[Function]}
-    value={false}
-  >
-    <i
-      className="fas fa-star"
-    />
-  </button>
-  <span />
 </div>
 `;

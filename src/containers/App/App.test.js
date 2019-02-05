@@ -48,13 +48,35 @@ describe('App', () => {
 
   describe('mapDispatchToProps', () => {
 
-    it('should call dispatch when using a function from MDTP', () => {
+    it('should call dispatch when using dispatchStoreMovies from MDTP', () => {
       //setup
       const mockDispatch = jest.fn()
       const actionToDispatch = actions.storeMovies([{}])
       //execution
       const mappedProps = mapDispatchToProps(mockDispatch)
       mappedProps.dispatchStoreMovies([{}])
+      //expectation
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
+
+    it('should call dispatch when using dispatchSetLoading from MDTP', () => {
+      //setup
+      const mockDispatch = jest.fn()
+      const actionToDispatch = actions.setLoading([{}])
+      //execution
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.dispatchSetLoading([{}])
+      //expectation
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
+
+    it('should call dispatch when using dispatchSetError from MDTP', () => {
+      //setup
+      const mockDispatch = jest.fn()
+      const actionToDispatch = actions.setError([{}])
+      //execution
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.dispatchSetError([{}])
       //expectation
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
     })
