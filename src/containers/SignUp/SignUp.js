@@ -15,13 +15,8 @@ export class SignUp extends Component {
   }
 
   handleChange = (event) => {
-    if (event.target.name === 'username') {
-      this.setState({ username: event.target.value })
-    } else if (event.target.name === 'password') {
-      this.setState({ password: event.target.value })
-    } else {
-      this.setState({ name: event.target.value })
-    }
+    const {name, value} = event.target
+    this.setState({[name]: value})
   }
 
   handleSubmit = async (event) => {
