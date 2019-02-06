@@ -15,7 +15,11 @@ export class Favorites extends Component {
       })
 
     return (
-      <div className='favorites'>{displayFavorites}</div>
+      <div>
+        {!favorites.length ? 
+        <div className='add-fave-div'><p className='add-fave-message'>You don't have any favorites yet! Add some to make movie magic!</p></div> : 
+        <div className='favorites'>{displayFavorites}</div>}
+      </div>
     )
   }
 }
