@@ -38,7 +38,7 @@ export class MovieCard extends Component {
       })
       setTimeout(() => {
         this.setState({ isUser: null })
-      }, 2000)
+      }, 4000)
     }
   }
 

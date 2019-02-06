@@ -67,6 +67,17 @@ exports[`SignUp should match the snapshot 1`] = `
     >
       Submit
     </button>
+    <p
+      className="login-message"
+    >
+      Already have an account? 
+      <Link
+        replace={false}
+        to="/login"
+      >
+        Login!
+      </Link>
+    </p>
   </form>
 </div>
 `;

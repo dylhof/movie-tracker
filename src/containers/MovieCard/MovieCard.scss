@@ -69,7 +69,7 @@
     text-align: center;
     line-height: 2.5;
     box-shadow: 0 0 5px #2b0c0e;
-    animation: slide-bottom 2s ease-in-out alternate both;;
+    animation: slide-bottom 4s ease-in-out alternate both;;
 }
 
 @keyframes slide-bottom {
@@ -77,11 +77,11 @@
     transform: translateY(-50px);
   }
 
-  30%{
+  10%{
     transform: translateY(0px)
   }
 
-  80%{
+  90%{
     transform: translateY(0px)
   }
 

@@ -28,6 +28,13 @@ describe('MovieDetails', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
+  it('should have initial state', () => {
+    //setup
+    const expected = { isUser: null }
+    //expectation
+    expect(wrapper.state()).toEqual(expected)
+  })
+
   describe('handleFavoriteClick', () => {
 
     it('should call tryUnfavorite if currentUser and already favorite', async () => {

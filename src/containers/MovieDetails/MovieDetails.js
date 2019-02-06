@@ -8,7 +8,7 @@ export class MovieDetails extends Component{
   constructor() {
     super()
     this.state = {
-      isUser: ''
+      isUser: null
     }
   }
 
@@ -36,11 +36,15 @@ export class MovieDetails extends Component{
       this.setState({
         isUser: 'Please login or create an acount to favorite your movies!'
       })
+      setTimeout(() => {
+        this.setState({ isUser: null })
+      }, 4000)
     }
   }
   
   render() {
     const {title, release_date, overview, backdrop_path, favorites, vote_average, id} = this.props
+    const { isUser } = this.state
     const poster = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
     const alt = `${title} poster`
     const cssClasses = ["favorite-btn", favorites.includes(id) ? "isFavorite" : null]
@@ -57,6 +61,10 @@ export class MovieDetails extends Component{
           <p className='overview'>{overview}</p>
           <p>Original Release Date: {release_date}</p>
           <p>The Movie DataBase Vote Average: {vote_average}</p>
+          {isUser ?
+          <span className='error-movie-card'>{isUser}</span>
+          : null
+         }
         </div>
       </div>
     )
