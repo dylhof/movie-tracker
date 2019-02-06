@@ -59,4 +59,14 @@ margin-top: 20px;
   &:focus{
     outline: 0px;
   }
+
+}
+
+.signup-message {
+  color: $font-color;
+  a {
+    &:visited {
+      color: $font-color;
+    }
+  }
 }

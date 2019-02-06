@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchPost } from '../../helper/apiCall';
 import { connect } from 'react-redux';
 import { setCurrentUser, setError } from '../../actions';
@@ -58,6 +59,7 @@ export class SignUp extends Component {
             <input id='signup-password' className='signup-input' name='password' value={password} onChange={this.handleChange} />
           </div>
           <button className='signup-submit'>Submit</button>
+          <p className='login-message'>Already have an account? <Link to={`/login`}>Login!</Link></p>
         </form>
       </div>
     )
