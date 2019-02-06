@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match the snapshot if there is a current user 1`] = `
+<div
+  className="App"
+>
+  <Connect(NavBar) />
+  <div
+    className="error"
+  />
+  <Switch>
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <Route
+      path="/favorites"
+      render={[Function]}
+    />
+    <Route
+      path="/login"
+      render={[Function]}
+    />
+    <Route
+      path="/signUp"
+      render={[Function]}
+    />
+    <Route
+      path="/movie/:id"
+      render={[Function]}
+    />
+  </Switch>
+</div>
+`;
+
+exports[`App should match the snapshot if there is not a current user 1`] = `
+<div
+  className="App"
+>
+  <Connect(NavBar) />
+  <div
+    className="error"
+  />
+  <Switch>
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <Route
+      path="/favorites"
+      render={[Function]}
+    />
+    <Route
+      path="/login"
+      render={[Function]}
+    />
+    <Route
+      path="/signUp"
+      render={[Function]}
+    />
+    <Route
+      path="/movie/:id"
+      render={[Function]}
+    />
+  </Switch>
+</div>
+`;

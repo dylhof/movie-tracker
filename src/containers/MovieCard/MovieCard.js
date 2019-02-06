@@ -22,7 +22,6 @@ export class MovieCard extends Component {
         await helper.tryUnfavorite(id, userID)
         this.props.dispatchDeleteFavorite(id)
       } catch (error) {
-        console.log('called')
         this.props.dispatchSetError('Sorry! Something went wrong and we couldn\'t remove this movie from your favorites')
       }
     } else if (currentUser && event.target.value === 'false') {
@@ -51,8 +50,8 @@ export class MovieCard extends Component {
         <div className='title-favorite-div'>
           <h2>{title}</h2>
           <button className={cssClasses.join(' ')} value={value} onClick={(event) => this.handleFavoriteClick(event)}><i className='fas fa-star'></i></button>
-          <span className='error'>{this.state.isUser}</span>
         </div>
+        <span className='error-movie-card'>{this.state.isUser}</span>
         <Link to={`/movie/${id}`}>
           <img className='movie-poster' src={poster} alt={alt} />
         </Link>

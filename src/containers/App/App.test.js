@@ -28,6 +28,30 @@ describe('App', () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 
+  it('should match the snapshot if there is a current user', () => {
+    const mockdispatchSetLoading = jest.fn()
+    const mockdispatchSetError = jest.fn()
+    const mockCurrentUser = {name: 'Matt', id: 1}
+    wrapper = shallow(
+      <App currentUser={mockCurrentUser}
+        dispatchSetLoading={mockdispatchSetLoading}
+        dispatchSetError={mockdispatchSetError}/>
+    )
+    expect(wrapper).toMatchSnapshot()
+  })
+
+  it('should match the snapshot if there is not a current user', () => {
+    const mockdispatchSetLoading = jest.fn()
+    const mockdispatchSetError = jest.fn()
+    const mockCurrentUser = null
+    wrapper = shallow(
+      <App currentUser={mockCurrentUser}
+      dispatchSetLoading={mockdispatchSetLoading}
+      dispatchSetError={mockdispatchSetError}/>
+    )
+    expect(wrapper).toMatchSnapshot()
+  })
+
   describe('mapStateToProps', () => {
 
     it('should return an object with a movies array', () => {
