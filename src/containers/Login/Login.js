@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchPost, fetchData } from '../../helper/apiCall'
 import { setCurrentUser, addAllUserFavorites, setError } from '../../actions';
 import { connect } from 'react-redux';
@@ -56,6 +57,7 @@ export class Login extends Component {
             <input id='login-password' className='login-input' name='password' value={password} onChange={this.handleChange} />
           </div>
           <button className='login-submit'>Submit</button>
+          <p className='signup-message'>Don't have an account? <Link to={`/signup`}>Sign up!</Link></p>
         </form>
       </div>
     )

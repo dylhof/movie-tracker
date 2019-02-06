@@ -22,7 +22,6 @@ export class MovieCard extends Component {
         await helper.tryUnfavorite(id, userID)
         this.props.dispatchDeleteFavorite(id)
       } catch (error) {
-        console.log('called')
         this.props.dispatchSetError('Sorry! Something went wrong and we couldn\'t remove this movie from your favorites')
       }
     } else if (currentUser && event.target.value === 'false') {
