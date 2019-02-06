@@ -17,9 +17,6 @@ exports[`MovieCard should match the snapshot 1`] = `
         className="fas fa-star"
       />
     </button>
-    <span
-      className="error"
-    />
   </div>
   <Link
     replace={false}

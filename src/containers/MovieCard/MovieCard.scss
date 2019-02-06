@@ -32,11 +32,9 @@
 .favorite-btn {
   border: 0;
   padding: 0;
-  //position
   position: relative;
   top: -16px;
   right: 17px;
-  // margin: 10px 20px 27px 0;
   z-index: 1;
   display: block;
   align-self: flex-end;
@@ -60,40 +58,34 @@
 .fa-star {
   pointer-events: none;
 }
+
 .error-movie-card {
-  font-size: 10px;
-  color: $font-color;
-  margin: 8px;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: $font-color;
+    text-align: center;
+    line-height: 2.5;
+    box-shadow: 0 0 5px #2b0c0e;
+    animation: slide-bottom 2s ease-in-out alternate both;;
 }
-// .error-movie-card {
-//     position: absolute;
-//     z-index: 101;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     background: $font-color;
-//     text-align: center;
-//     line-height: 2.5;
-//     box-shadow: 0 0 5px #2b0c0e;
-//     animation: slide-bottom 2s ease-in-out alternate both;;
-// }
 
-// @keyframes slide-bottom {
-//   0% {
-//       transform: translateY(0);
-//   }
+@keyframes slide-bottom {
+  0% {
+    transform: translateY(-50px);
+  }
 
-//   100%{
-//     transform: translateY(50px)
-//   }
-// }
+  30%{
+    transform: translateY(0px)
+  }
 
+  80%{
+    transform: translateY(0px)
+  }
 
-// .cssanimations.csstransforms .error-movie-card{
-//   // -webkit-transform: translateY(-50px);
-//   -webkit-animation: slideDown 2.5s 1.0s 1 ease-in-out forwards;
-// }
-
-// .cssanimations.csstransforms .close-error-span {
-//   display: none;
-// }
+  100%{
+    transform: translateY(-50px)
+  }
+}

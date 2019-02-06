@@ -30,7 +30,7 @@ describe('MovieCard', () => {
 
   it('should have initial state', () => {
     //setup
-    const expected = { isUser: '' }
+    const expected = { isUser: null }
     //expectation
     expect(wrapper.state()).toEqual(expected)
   })
