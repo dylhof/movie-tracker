@@ -9,7 +9,7 @@ export class MovieCard extends Component {
   constructor() {
     super()
     this.state = {
-      isUser: ''
+      isUser: null
     }
   }
 
@@ -37,11 +37,15 @@ export class MovieCard extends Component {
       this.setState({
         isUser: 'Please login or create an acount to favorite your movies!'
       })
+      setTimeout(() => {
+        this.setState({ isUser: null })
+      }, 2000)
     }
   }
 
   render() {
     const { title, poster_path, id, favorites } = this.props
+    const { isUser } = this.state
     const cssClasses = ["favorite-btn", favorites.includes(id) ? "isFavorite" : null]
     const value = favorites.includes(id) ? true : false
     const poster = `https://image.tmdb.org/t/p/w200/${poster_path}`
@@ -52,7 +56,10 @@ export class MovieCard extends Component {
           <h2>{title}</h2>
           <button className={cssClasses.join(' ')} value={value} onClick={(event) => this.handleFavoriteClick(event)}><i className='fas fa-star'></i></button>
         </div>
-        <span className='error-movie-card'>{this.state.isUser}</span>
+        {isUser ?
+          <span className='error-movie-card'>{isUser}</span>
+          : null
+        }
         <Link to={`/movie/${id}`}>
           <img className='movie-poster' src={poster} alt={alt} />
         </Link>
