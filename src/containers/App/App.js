@@ -11,13 +11,14 @@ import { fetchData } from '../../helper/apiCall'
 import { storeMovies, setLoading, setError } from '../../actions'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+import {APIKEY} from '../../APIKEY';
 
 export class App extends Component {
 
   fetchAndStoreMovies = async () => {
     this.props.dispatchSetLoading(true)
     try {
-      const url = 'https://api.themoviedb.org/3/discover/movie?api_key=4340824bb6ffe9ee70c52fc088a91d53&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1'
+      const url = `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
       const moviesData = await fetchData(url)
       this.props.dispatchSetLoading(false)
       const movies = moviesData.results
