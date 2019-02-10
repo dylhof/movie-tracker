@@ -16,6 +16,7 @@ export class NavBar extends Component {
     const isCurrentUser = Object.keys(currentUser).length === 0 ? false : true
     return (
       <div className="NavBar">
+        {isCurrentUser ? <h2 className="signup-login-btns">{currentUser.name}</h2> : null} 
         <NavLink className='nav-link' exact to="/"><div className="home-btn">Movie Tracker</div></NavLink>
         <div className="small-btns">
           <NavLink className='nav-link' exact to={isCurrentUser ? '/favorites' : '/login'}>
