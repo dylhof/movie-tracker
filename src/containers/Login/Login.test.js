@@ -25,7 +25,7 @@ describe('Login', () => {
 
   it('should have initial state', () => {
     //setup
-    const expected = { username: '', password: '' }
+    const expected = { username: '', password: '', error: '' }
     //expectation
     expect(wrapper.state()).toEqual(expected)
   })
@@ -130,17 +130,6 @@ describe('Login', () => {
       //execution
       const mappedProps = mapDispatchToProps(mockDispatch)
       mappedProps.dispatchAddAllUserFavorites([1, 3])
-      //expectation
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
-    })
-
-    it('should call dispatch when calling dispatchSetError from mdtp', () => {
-      //setup
-      const mockDispatch = jest.fn()
-      const actionToDispatch = actions.setError('Something went wrong')
-      //execution
-      const mappedProps = mapDispatchToProps(mockDispatch)
-      mappedProps.dispatchSetError('Something went wrong')
       //expectation
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
     })

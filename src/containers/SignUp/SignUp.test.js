@@ -23,7 +23,7 @@ describe('SignUp', () => {
 
   it('should have initial State', () => {
     //setup
-    const expected = { name: '', username: '', password: '' }
+    const expected = { name: '', username: '', password: '', confirmPassword: '', error: '' }
     //expectation
     expect(wrapper.state()).toEqual(expected)
   })
@@ -96,8 +96,8 @@ describe('SignUp', () => {
 
     it('should reset all state inputs to empty string', async () => {
       //setup
-      wrapper.instance().setState({ name: 'Matt', username: 'Matt@matt', password: 'matt' })
-      const expected = {name: '', username: '', password: ''}
+      wrapper.instance().setState({ name: 'Matt', username: 'Matt@matt', password: 'matt', confirmPassword: 'matt' })
+      const expected = {name: '', username: '', password: '', confirmPassword: '', error: ''}
       //execution
       await wrapper.instance().handleSubmit(mockEvent)
       //expectation
@@ -114,17 +114,6 @@ describe('SignUp', () => {
       //execution
       const mappedProps = mapDispatchToProps(mockDispatch)
       mappedProps.dispatchSetCurrentUser('Matt', 1)
-      //expectation
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
-    })
-
-    it('should call dispatch when calling dispatchSetError from mdtp', () => {
-      //setup
-      const mockDispatch = jest.fn()
-      const actionToDispatch = actions.setError('Something went wrong')
-      //execution
-      const mappedProps = mapDispatchToProps(mockDispatch)
-      mappedProps.dispatchSetError('Something went wrong')
       //expectation
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
     })
