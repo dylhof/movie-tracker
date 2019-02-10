@@ -55,10 +55,6 @@ export class MovieCard extends Component {
           <h2>{title}</h2>
           <button className={cssClasses.join(' ')} value={value} onClick={(event) => this.handleFavoriteClick(event)}><i className='fas fa-star'></i></button>
         </div>
-        {isUser ?
-          <span className='error-movie-card'>{isUser}</span>
-          : null
-        }
         <Link to={`/movie/${id}`}>
           <img className='movie-poster' src={poster} alt={alt} />
         </Link>

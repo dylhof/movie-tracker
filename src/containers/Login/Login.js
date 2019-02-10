@@ -10,7 +10,8 @@ export class Login extends Component {
     super()
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      error: '',
     }
   }
   handleChange = (event) => {
@@ -35,26 +36,30 @@ export class Login extends Component {
       const favoritesResponse = await fetchData(url)
       const favoriteIDs = favoritesResponse.data.map(favorite => favorite.movie_id)
       this.props.dispatchAddAllUserFavorites(favoriteIDs)
-      this.props.dispatchSetError('')
     } catch (error) {
-      this.props.dispatchSetError('Your email and password do not match!')
+      this.setState({error: "That email and password combination do not match our records!" })
+      setTimeout(() => {
+        this.setState({ error: '' })
+      }, 4000)
     }
   }
 
   render() {
-    const { error } = this.props
-    const { username, password } = this.state
+    const { username, password, error } = this.state
     return (
       <div className='login-form-div'>
+        {error ?
+          <span className='error-movie-card'>{error}</span>
+          : null
+        }
         <form className='login-form' onSubmit={this.handleSubmit}>
-          <div className='login-inner-div'>{error}</div>
           <div className='login-inner-div'>
             <label htmlFor='login-email' className='login-label'>Email</label>
             <input id='login-email' className='login-input' name='username' value={username} onChange={this.handleChange} type='email' />
           </div>
           <div className='login-inner-div'>
             <label htmlFor='login-password' className='login-label'>Password</label>
-            <input id='login-password' className='login-input' name='password' value={password} onChange={this.handleChange} />
+            <input id='login-password' className='login-input' name='password' value={password} onChange={this.handleChange} type='password'/>
           </div>
           <button className='login-submit'>Submit</button>
           <p className='signup-message'>Don't have an account? <Link to={`/signup`}>Sign up!</Link></p>
@@ -67,7 +72,6 @@ export class Login extends Component {
 export const mapDispatchToProps = (dispatch) => ({
   dispatchSetCurrentUser: (name, id) => dispatch(setCurrentUser(name, id)),
   dispatchAddAllUserFavorites: (favorites) => dispatch(addAllUserFavorites(favorites)),
-  dispatchSetError: (message) => dispatch(setError(message))
 })
 
 export default connect(null, mapDispatchToProps)(Login)
@@ -75,5 +79,4 @@ export default connect(null, mapDispatchToProps)(Login)
 Login.propTypes = {
   dispatchSetCurrentUser: PropTypes.func,
   dispatchAddAllUserFavorites: PropTypes.func,
-  dispatchSetError: PropTypes.func
 }
