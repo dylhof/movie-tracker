@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchPost, fetchData } from '../../helper/apiCall'
-import { setCurrentUser, addAllUserFavorites, setError } from '../../actions';
+import { setCurrentUser, addAllUserFavorites } from '../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 

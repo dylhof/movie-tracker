@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addFavorite, deleteFavorite, setError } from '../../actions';
+import { addFavorite, deleteFavorite } from '../../actions';
 import { Link } from 'react-router-dom';
 import * as helper from '../../helper/helpers'
 import PropTypes from 'prop-types'

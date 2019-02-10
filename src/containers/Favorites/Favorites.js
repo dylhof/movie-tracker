@@ -1,27 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import MovieCard from '../MovieCard/MovieCard';
 import PropTypes from 'prop-types';
 
-export class Favorites extends Component {
-  render() {
-    const { movies, favorites } = this.props
-    const displayFavorites = movies
-      .filter(movie => favorites.includes(movie.id))
-      .map(movie => {
-        return (
-          <MovieCard {...movie} key={movie.id} />
-        )
-      })
+export const Favorites = (props) => {
+  const { movies, favorites } = props
+  const displayFavorites = movies
+    .filter(movie => favorites.includes(movie.id))
+    .map(movie => {
+      return (
+        <MovieCard {...movie} key={movie.id} />
+      )
+    })
 
-    return (
-      <div>
-        {!favorites.length ? 
-        <div className='add-fave-div'><p className='add-fave-message'>You don't have any favorites yet! Add some to make movie magic!</p></div> : 
+  return (
+    <div>
+      {!favorites.length ?
+        <div className='add-fave-div'><p className='add-fave-message'>You don't have any favorites yet! Add some to make movie magic!</p></div> :
         <div className='favorites'>{displayFavorites}</div>}
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 export const mapStateToProps = (state) => ({

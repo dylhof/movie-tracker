@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchPost } from '../../helper/apiCall';
 import { connect } from 'react-redux';
-import { setCurrentUser, setError } from '../../actions';
+import { setCurrentUser } from '../../actions';
 import PropTypes from 'prop-types'
 
 export class SignUp extends Component {
@@ -24,7 +24,7 @@ export class SignUp extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { password, confirmPassword, error } = this.state
+    const { password, confirmPassword } = this.state
     if (password !== confirmPassword) {
       this.setState({ error: 'Your passwords do not match! Please try again' })
       setTimeout(() => {

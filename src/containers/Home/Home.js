@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import MovieCard from '../MovieCard/MovieCard'
 import PropTypes from 'prop-types'
 
-export class Home extends Component {
-
-  render() {
-    const movieCards = this.props.movies.map(movie => {
+export const Home = (props) => {
+    const movieCards = props.movies.map(movie => {
       return (
         <MovieCard {...movie} key={movie.id} />
       )
@@ -14,7 +12,6 @@ export class Home extends Component {
     return (
       <div className='home'>{movieCards}</div>
     )
-  }
 }
 
 export const mapStateToProps = (state) => ({
