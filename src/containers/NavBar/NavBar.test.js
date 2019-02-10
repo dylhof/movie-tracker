@@ -26,7 +26,7 @@ describe('NavBar', () => {
 
   it('should match the snapshot with no current user', () => {
     wrapper = shallow(
-      <NavBar currentUser={null} />
+      <NavBar currentUser={{}} />
     )
     expect(wrapper).toMatchSnapshot()
   })

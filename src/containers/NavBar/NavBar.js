@@ -13,21 +13,21 @@ export class NavBar extends Component {
 
   render() {
     const {currentUser, favorites} = this.props
+    const isCurrentUser = Object.keys(currentUser).length === 0 ? false : true
     return (
       <div className="NavBar">
         <NavLink className='nav-link' exact to="/"><div className="home-btn">Movie Tracker</div></NavLink>
         <div className="small-btns">
-          <NavLink className='nav-link' exact to={(currentUser) ? '/favorites' : '/login'}>
-            <div className="favorites-btn">Favorites {currentUser ? favorites.length : null}</div>
+          <NavLink className='nav-link' exact to={isCurrentUser ? '/favorites' : '/login'}>
+            <div className="favorites-btn">Favorites {isCurrentUser ? favorites.length : null}</div>
           </NavLink>
-          {
-            currentUser ?
-              <div className='logout-btn' onClick={this.handleLogoutClick}>Logout</div>
-              :
+          {  
+            isCurrentUser ?
+              <div className='logout-btn' onClick={this.handleLogoutClick}>Logout</div> :
               <div className="signup-login-btns">
                 <NavLink className='nav-link' exact to='/login'><div className="login-btn">Login</div></NavLink>
                 <NavLink className='nav-link' exact to='/signUp'><div className="signup-btn">Sign up</div></NavLink>
-              </div>
+              </div> 
           }
         </div>
       </div>
