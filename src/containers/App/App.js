@@ -33,6 +33,7 @@ export class App extends Component {
   }
 
   render() {
+    const isCurrentUser = Object.keys(this.props.currentUser).length === 0 ? false : true
     return (
       <div className="App">
         <NavBar />
@@ -48,7 +49,7 @@ export class App extends Component {
             <Switch>
               <Route exact path='/' component={Home} />
               <Route path='/favorites' render={() => (
-                this.props.currentUser ? (
+                isCurrentUser ? (
                   <Favorites />
                 ) : (
                     <Redirect to='/login' />
@@ -56,14 +57,14 @@ export class App extends Component {
               )} />
 
               <Route path='/login' render={() => (
-                this.props.currentUser ? (
+                isCurrentUser ? (
                   <Redirect to='/' />
                 ) : (
                     <Login />
                   )
               )} />
               <Route path='/signUp' render={() => (
-                this.props.currentUser ? (
+                isCurrentUser ? (
                   <Redirect to='/' />
                 ) : (
                     <SignUp />

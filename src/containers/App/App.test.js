@@ -21,7 +21,7 @@ describe('App', () => {
     ReactDOM.render(
       <Provider store={store}>
         <BrowserRouter>
-          <App />
+          <App currentUser={{}}/>
         </BrowserRouter>
       </Provider>
       , div);
@@ -43,7 +43,7 @@ describe('App', () => {
   it('should match the snapshot if there is not a current user', () => {
     const mockdispatchSetLoading = jest.fn()
     const mockdispatchSetError = jest.fn()
-    const mockCurrentUser = null
+    const mockCurrentUser = {}
     wrapper = shallow(
       <App currentUser={mockCurrentUser}
       dispatchSetLoading={mockdispatchSetLoading}
@@ -111,6 +111,7 @@ describe('App', () => {
     const mockDispatchSetLoading = jest.fn()
     beforeEach(() => {
       wrapper = shallow(<App
+        currentUser={{}}
         dispatchStoreMovies={mockDispatchStoreMovies}
         dispatchSetLoading={mockDispatchSetLoading}
       />)
