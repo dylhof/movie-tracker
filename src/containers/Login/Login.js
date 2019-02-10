@@ -53,6 +53,7 @@ export class Login extends Component {
           : null
         }
         <form className='login-form' onSubmit={this.handleSubmit}>
+        <p className='signup-message'>Please login to add movies to your favorites!</p>
           <div className='login-inner-div'>
             <label htmlFor='login-email' className='login-label'>Email</label>
             <input id='login-email' className='login-input' name='username' value={username} onChange={this.handleChange} type='email' />

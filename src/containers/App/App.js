@@ -12,6 +12,7 @@ import { storeMovies, setLoading, setError } from '../../actions'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {APIKEY} from '../../APIKEY';
+import {NotFound} from '../../component/NotFound/NotFound';
 
 export class App extends Component {
 
@@ -77,6 +78,7 @@ export class App extends Component {
                   return <MovieDetails {...movie} />
                 }
               }} />
+              <Route component={NotFound}/>
             </Switch>
         }
       </div>
