@@ -34,6 +34,7 @@ export class App extends Component {
   }
 
   render() {
+    
     const isCurrentUser = Object.keys(this.props.currentUser).length === 0 ? false : true
     return (
       <div className="App">
