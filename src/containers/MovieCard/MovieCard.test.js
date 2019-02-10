@@ -10,14 +10,12 @@ describe('MovieCard', () => {
     let currentUser = { name: 'Matt', userID: 1 }
     let mockDispatchDeleteFavorite = jest.fn()
     let mockDispatchAddFavorite = jest.fn()
-    let mockDispatchSetError = jest.fn()
     let mockFavorites = [1, 2, 3]
     wrapper = shallow(
       <MovieCard
         currentUser={currentUser}
         dispatchDeleteFavorite={mockDispatchDeleteFavorite}
         dispatchAddFavorite={mockDispatchAddFavorite}
-        dispatchSetError={mockDispatchSetError}
         favorites={mockFavorites}
       />
     )
@@ -30,7 +28,7 @@ describe('MovieCard', () => {
 
   it('should have initial state', () => {
     //setup
-    const expected = { isUser: null }
+    const expected = { error: '' }
     //expectation
     expect(wrapper.state()).toEqual(expected)
   })
@@ -48,16 +46,6 @@ describe('MovieCard', () => {
       expect(helper.tryUnfavorite).toHaveBeenCalled()
     })
 
-    it('should call dispatchSetError if current user and already favorite if fetch fails', async () => {
-      //setup
-      const mockEvent = { target: { value: 'true' } }
-      helper.tryUnfavorite = jest.fn().mockImplementation(() => Promise.reject())
-      //execution
-      await wrapper.instance().handleFavoriteClick(mockEvent)      
-      //expectation
-      expect(wrapper.instance().props.dispatchSetError).toHaveBeenCalledWith('Sorry! Something went wrong and we couldn\'t remove this movie from your favorites')
-    })
-
     it('should call tryFavorite if currentUser and not already favorite', async () => {
       //setup 
       const mockEvent = { target: { value: 'false' } }
@@ -69,21 +57,11 @@ describe('MovieCard', () => {
       expect(helper.tryFavorite).toHaveBeenCalled()
     })
 
-    it('should call dispatchSetError if current user and not already favorite if fetch fails', async () => {
-      //setup
-      const mockEvent = { target: { value: 'false' } }
-      helper.tryFavorite = jest.fn().mockImplementation(() => Promise.reject())
-      //execution
-      await wrapper.instance().handleFavoriteClick(mockEvent)      
-      //expectation
-      expect(wrapper.instance().props.dispatchSetError).toHaveBeenCalledWith('Sorry! Something went wrong and we couldn\'t add this movie to your favorites')
-    })
-
-    it('should set state of isUser if there is no current user', () => {
+    it('should set state of error if there is no current user', () => {
       //setup
       const mockEvent = { target: { value: 'false' } }
       let mockFavorites = [1, 2, 3]
-      let currentUser = null
+      let currentUser = {}
       wrapper = shallow(
         <MovieCard
           currentUser={currentUser}
@@ -92,7 +70,7 @@ describe('MovieCard', () => {
       //execution
       wrapper.instance().handleFavoriteClick(mockEvent)
       //expectation
-      expect(wrapper.state('isUser')).toEqual('Please login or create an acount to favorite your movies!')
+      expect(wrapper.state('error')).toEqual('Please login or create an acount to favorite your movies!')
     })
   })
 
@@ -109,7 +87,7 @@ describe('MovieCard', () => {
       const expected = {
         currentUser: [{ title: 'Aquaman' }],
         favorites: [{}],
-        error: 'Error'
+        
       }
       //execution
       const mappedProps = mapStateToProps(mockState)
@@ -142,16 +120,6 @@ describe('MovieCard', () => {
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
     })
 
-    it('should call dispatch when using dispatchSetError from MDTP', () => {
-      //setup
-      const mockDispatch = jest.fn()
-      const actionToDispatch = actions.setError('hello')
-      //execution
-      const mappedProps = mapDispatchToProps(mockDispatch)
-      mappedProps.dispatchSetError('hello')
-      //expectation
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
-    })
   })
 
 })
